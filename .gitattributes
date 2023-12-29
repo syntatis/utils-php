@@ -1,0 +1,11 @@
+/.devcontainer     export-ignore
+/.editorconfig     export-ignore
+/.gitattributes    export-ignore
+/.github           export-ignore
+/.gitignore        export-ignore
+/.vscode           export-ignore
+/docs              export-ignore
+/phpstan.neon.dist export-ignore
+/phpcs.xml.dist    export-ignore
+/phpunit.xml.dist  export-ignore
+/tests             export-ignore

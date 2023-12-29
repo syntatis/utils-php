@@ -1,0 +1,28 @@
+{
+	"name": "syntatis/php-utils",
+	"image": "ghcr.io/syntatis/php:7.4-fpm",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"php.validate.executablePath": "/usr/local/bin/php",
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash",
+						"args": [
+							"-l"
+						]
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"bmewburn.vscode-intelephense-client",
+				"christian-kohler.path-intellisense",
+				"editorConfig.editorConfig",
+				"neilbrayfield.php-docblocker",
+				"SanderRonde.phpstan-vscode",
+				"wongjn.php-sniffer"
+			]
+		}
+	}
+}

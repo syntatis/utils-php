@@ -1,0 +1,27 @@
+#OS
+.DS_*
+
+# Composer
+/vendor
+composer.lock
+auth.json
+
+# Log, cache, and tmp files
+*.cache
+*.log
+*.meta
+tmp/
+
+# Dotenv
+.env.*
+!.env
+
+# Tests #
+#############
+artifacts/
+phpunit.xml
+phpstan.neon
+phpcs.xml
+
+# Docker
+docker-composer.override.yml
