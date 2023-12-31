@@ -65,7 +65,7 @@
 		"php": "^7.4 || ^8.0",
 		"egulias/email-validator": "^3.2.6 || ^4.0",
 		"jawira/case-converter": "^3.5",
-		"symfony/validator": "^5.4 || ^6.1 || ^7.0"
+		"symfony/validator": "^5.4.34"
 	},
 	"require-dev": {
 		"composer/installers": "^2.2",
