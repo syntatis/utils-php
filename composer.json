@@ -62,7 +62,7 @@
 		]
 	},
 	"require": {
-		"php": "^7.4 || ^8.0",
+		"php": ">=7.4",
 		"egulias/email-validator": ">=3.2.6",
 		"jawira/case-converter": "^3.5",
 		"symfony/validator": ">=5.4"
