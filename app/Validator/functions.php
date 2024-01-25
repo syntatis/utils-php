@@ -23,6 +23,7 @@ use const PHP_VERSION_ID;
  * @param mixed $value
  *
  * @phpstan-assert-if-true non-empty-string $value
+ * @psalm-assert-if-true non-empty-string $value
  */
 function is_email($value): bool
 {
@@ -45,6 +46,7 @@ function is_email($value): bool
  * @param array<int>|null $versions
  *
  * @phpstan-param array<value-of<Uuid::ALL_VERSIONS>>|null $versions
+ * @psalm-param array{value-of<Uuid::ALL_VERSIONS>}|null $versions
  */
 function is_uuid($value, ?array $versions = null): bool
 {
@@ -103,6 +105,7 @@ function is_url($value, array $protocols = ['http', 'https']): bool
  * @param mixed $value
  *
  * @phpstan-assert-if-true non-empty-string $value
+ * @psalm-assert-if-true non-empty-string $value
  */
 function is_semver($value): bool
 {
@@ -121,6 +124,7 @@ function is_semver($value): bool
  * @param mixed $value
  *
  * @phpstan-assert-if-true non-empty-string $value
+ * @psalm-assert-if-true non-empty-string $value
  */
 function is_ip_address($value): bool
 {
@@ -148,6 +152,7 @@ function is_ip_address($value): bool
  *                                     Required PHP 8.1 or higher.
  *
  * @phpstan-assert-if-true non-empty-array $value
+ * @psalm-assert-if-true non-empty-array $value
  */
 function is_unique($value, $fields = []): bool
 {
