@@ -73,7 +73,7 @@
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpstan/extension-installer": "^1.3",
 		"phpstan/phpstan": "^1.10",
-		"phpstan/phpstan-deprecation-rules": "^1.1",
+		"phpstan/phpstan-deprecation-rules": "^1.2",
 		"phpstan/phpstan-phpunit": "^1.3",
 		"phpstan/phpstan-strict-rules": "^1.6",
 		"phpunit/phpunit": "^9.6",
