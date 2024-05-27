@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\Utils\Tests;
+namespace Syntatis\Utils\Tests\Str;
 
 use PHPUnit\Framework\TestCase;
 
