@@ -7,7 +7,8 @@ namespace Syntatis\Utils\Validator;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class Validator
+/** @internal */
+final class Validator
 {
 	private static ?ValidatorInterface $instance = null;
 

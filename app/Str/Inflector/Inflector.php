@@ -7,16 +7,17 @@ namespace Syntatis\Utils\Str\Inflector;
 use Doctrine\Inflector\Inflector as DoctrineInflector;
 use Doctrine\Inflector\InflectorFactory;
 
-class Inflector
+/** @internal */
+final class Inflector
 {
-	private static ?DoctrineInflector $inflector = null;
+	private static ?DoctrineInflector $instance = null;
 
 	public static function instance(): DoctrineInflector
 	{
-		if (self::$inflector === null) {
-			self::$inflector = InflectorFactory::create()->build();
+		if (self::$instance === null) {
+			self::$instance = InflectorFactory::create()->build();
 		}
 
-		return self::$inflector;
+		return self::$instance;
 	}
 }
