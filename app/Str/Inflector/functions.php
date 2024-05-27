@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Syntatis\Utils\Inflector\Inflector;
+use Syntatis\Utils\Str\Inflector\Inflector;
 
 /**
  * Convert a string (word) to its singular form.

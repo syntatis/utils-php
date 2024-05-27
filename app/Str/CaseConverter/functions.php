@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Syntatis\Utils\CaseConverter\CaseConverter;
+use Syntatis\Utils\Str\CaseConverter\CaseConverter;
 
 /**
  * Convert a string to "camelCase" format.
