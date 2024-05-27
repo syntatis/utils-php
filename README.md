@@ -18,6 +18,8 @@ composer require syntatis/utils
 
 This PHP package includes a number of functions to perform common value validation, such as if a value is an email, URL, or not being blank.
 
+### Validator
+
 | Function | Description |
 | --- | --- |
 | `is_blank` | Validates whether a value is blank or empty. |
@@ -39,5 +41,9 @@ is_blank(''); // `true`.
 is_blank(' '); // `true`.
 is_blank('foo '); // `false`.
 ```
+
+### Case Converter
+
+### Inflector
 
 For other functions and examples, please refer to the [Wiki](https://github.com/syntatis/utils-php/wiki).

@@ -31,6 +31,7 @@
 	"autoload": {
 		"files": [
 			"app/CaseConverter/functions.php",
+			"app/Inflector/functions.php",
 			"app/Validator/functions.php"
 		],
 		"psr-4": {
@@ -40,6 +41,7 @@
 	"autoload-dev": {
 		"files": [
 			"app/CaseConverter/functions.php",
+			"app/Inflector/functions.php",
 			"app/Validator/functions.php"
 		],
 		"psr-4": {
@@ -63,6 +65,7 @@
 	},
 	"require": {
 		"php": ">=7.4",
+		"doctrine/inflector": "^2.0",
 		"egulias/email-validator": ">=3.2.6",
 		"jawira/case-converter": "^3.5",
 		"symfony/validator": ">=5.4.39"
