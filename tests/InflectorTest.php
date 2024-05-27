@@ -25,6 +25,7 @@ class InflectorTest extends TestCase
 		yield ['people', 'person'];
 	}
 
+	/** @dataProvider dataPluralize */
 	public function testPluralize(string $value, string $expect): void
 	{
 		$this->assertSame(pluralize($value), $expect);
