@@ -30,9 +30,7 @@
 	"prefer-stable": true,
 	"autoload": {
 		"files": [
-			"app/CaseConverter/functions.php",
-			"app/Inflector/functions.php",
-			"app/Validator/functions.php"
+			"app/functions.php"
 		],
 		"psr-4": {
 			"Syntatis\\Utils\\": "app"
@@ -40,9 +38,7 @@
 	},
 	"autoload-dev": {
 		"files": [
-			"app/CaseConverter/functions.php",
-			"app/Inflector/functions.php",
-			"app/Validator/functions.php"
+			"app/functions.php"
 		],
 		"psr-4": {
 			"Syntatis\\Utils\\Tests\\": "tests"
