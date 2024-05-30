@@ -8,8 +8,6 @@
 
 ---
 
-## Introduction
-
 The `syntatis/utils` package provides a variety of utility functions to simplify common tasks in PHP, including validation, case conversion, and inflection.
 
 ## Installation
