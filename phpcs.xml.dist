@@ -27,7 +27,7 @@
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="app" value="Syntatis\Utils"/>
-				<element key="tests" value="Syntatis\Utils\Tests"/>
+				<element key="tests/app" value="Syntatis\Utils\Tests"/>
 			</property>
 		</properties>
 	</rule>
