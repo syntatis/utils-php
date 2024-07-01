@@ -67,7 +67,7 @@
 		"symfony/validator": ">=5.4.40"
 	},
 	"require-dev": {
-		"composer/installers": "^2.2",
+		"composer/installers": "^2.3",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpstan/extension-installer": "^1.4",
