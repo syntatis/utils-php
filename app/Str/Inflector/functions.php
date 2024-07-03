@@ -8,8 +8,6 @@ use Syntatis\Utils\Str\Inflector\Inflector;
 
 /**
  * Convert a string (word) to its singular form.
- *
- * @phpstan-param non-empty-string $value
  */
 function singularize(string $value): string
 {
@@ -18,8 +16,6 @@ function singularize(string $value): string
 
 /**
  * Convert a string (word) to its plural form.
- *
- * @phpstan-param non-empty-string $value
  */
 function pluralize(string $value): string
 {
@@ -28,8 +24,6 @@ function pluralize(string $value): string
 
 /**
  * Convert a string to a URL friendly format.
- *
- * @phpstan-param non-empty-string $value
  */
 function slugify(string $value): string
 {
