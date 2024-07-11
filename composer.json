@@ -30,7 +30,7 @@
 	"prefer-stable": true,
 	"autoload": {
 		"files": [
-			"app/functions.php"
+			"inc/functions.php"
 		],
 		"psr-4": {
 			"Syntatis\\Utils\\": "app"
@@ -38,7 +38,7 @@
 	},
 	"autoload-dev": {
 		"files": [
-			"app/functions.php"
+			"inc/functions.php"
 		],
 		"psr-4": {
 			"Syntatis\\Utils\\Tests\\": "tests"
