@@ -7,10 +7,14 @@ updates:
 
   - package-ecosystem: "composer"
     versioning-strategy: increase
+    open-pull-requests-limit: 5
     directory: "/"
     schedule:
       interval: "weekly"
       day: "sunday"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       composer-require:
         dependency-type: "production"
