@@ -89,7 +89,7 @@ The inflector functions perform common inflection tasks, such as pluralizing or 
 #### Examples
 
 ```php
-use function Syntatis\Utils\pluralize;
+use function Syntatis\Utils\Str;
 
 // Pluralize a word
 Str::toPlural('apple'); // apples
