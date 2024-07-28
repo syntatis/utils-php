@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\Utils\Str\CaseConverter;
+namespace Syntatis\Utils\Support\Str\CaseConverter;
 
 use Jawira\CaseConverter\CaseConverter as CaseConverterFactory;
 

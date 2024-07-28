@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils\Tests\Str;
 
+use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
+use Syntatis\Utils\Str;
 
 use function Syntatis\Utils\pluralize;
 use function Syntatis\Utils\singularize;
@@ -15,6 +17,7 @@ class InflectorTest extends TestCase
 	/** @dataProvider dataSingularize */
 	public function testSingularize(string $value, string $expect): void
 	{
+		$this->assertSame(Str::toSingular($value), $expect);
 		$this->assertSame(singularize($value), $expect);
 	}
 
@@ -28,6 +31,7 @@ class InflectorTest extends TestCase
 	/** @dataProvider dataPluralize */
 	public function testPluralize(string $value, string $expect): void
 	{
+		$this->assertSame(Str::toPlural($value), $expect);
 		$this->assertSame(pluralize($value), $expect);
 	}
 
@@ -44,6 +48,7 @@ class InflectorTest extends TestCase
 	 */
 	public function testSlugify(string $value, string $expect): void
 	{
+		$this->assertSame(Str::toSlug($value), $expect);
 		$this->assertSame($expect, slugify($value));
 	}
 

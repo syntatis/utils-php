@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\Utils\Str\Inflector;
+namespace Syntatis\Utils\Support\Str\Inflector;
 
 use Doctrine\Inflector\Inflector as DoctrineInflector;
 use Doctrine\Inflector\InflectorFactory;
