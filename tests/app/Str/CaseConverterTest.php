@@ -7,6 +7,7 @@ namespace Syntatis\Utils\Tests\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
+use Syntatis\Utils\Str;
 
 use function Syntatis\Utils\camelcased;
 use function Syntatis\Utils\cobolcased;
@@ -28,15 +29,17 @@ class CaseConverterTest extends TestCase
 	public function testCamelCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, camelcased($value));
+		$this->assertEquals($expect, Str::toCamelCase($value));
 	}
 
 	/**
 	 * @dataProvider dataKebabCased
-	 * @testdox it can convert string to camelcase
+	 * @testdox it can convert string to kebabcase
 	 */
 	public function testKebabCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, kebabcased($value));
+		$this->assertEquals($expect, Str::toKebabCase($value));
 	}
 
 	/**
@@ -46,6 +49,7 @@ class CaseConverterTest extends TestCase
 	public function testSnakeCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, snakecased($value));
+		$this->assertEquals($expect, Str::toSnakeCase($value));
 	}
 
 	/**
@@ -55,6 +59,7 @@ class CaseConverterTest extends TestCase
 	public function testPascalCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, pascalcased($value));
+		$this->assertEquals($expect, Str::toPascalCase($value));
 	}
 
 	/**
@@ -64,6 +69,7 @@ class CaseConverterTest extends TestCase
 	public function testTitleCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, titlecased($value));
+		$this->assertEquals($expect, Str::toTitleCase($value));
 	}
 
 	/**
@@ -73,6 +79,7 @@ class CaseConverterTest extends TestCase
 	public function testLowerCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, lowercased($value));
+		$this->assertEquals($expect, Str::toLowerCase($value));
 	}
 
 	/**
@@ -82,6 +89,7 @@ class CaseConverterTest extends TestCase
 	public function testUpperCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, uppercased($value));
+		$this->assertEquals($expect, Str::toUpperCase($value));
 	}
 
 	/**
@@ -91,6 +99,7 @@ class CaseConverterTest extends TestCase
 	public function testMacroCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, macrocased($value));
+		$this->assertEquals($expect, Str::toMacroCase($value));
 	}
 
 	/**
@@ -100,6 +109,7 @@ class CaseConverterTest extends TestCase
 	public function testCobolCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, cobolcased($value));
+		$this->assertEquals($expect, Str::toCobolCase($value));
 	}
 
 	/**
@@ -109,6 +119,7 @@ class CaseConverterTest extends TestCase
 	public function testSentenceCased(string $value, string $expect): void
 	{
 		$this->assertEquals($expect, sentencecased($value));
+		$this->assertEquals($expect, Str::toSentenceCase($value));
 	}
 
 	public function dataCamelCased(): iterable

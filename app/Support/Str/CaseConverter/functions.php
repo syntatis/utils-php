@@ -6,12 +6,22 @@ namespace Syntatis\Utils;
 
 use Syntatis\Utils\Support\Str\CaseConverter\CaseConverter;
 
+use function trigger_deprecation;
+
 /**
  * Convert a string to "camelCase" format.
  */
 function camelcased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toCamel();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toCamelCase',
+	);
+
+	return Str::toCamelCase($value);
 }
 
 /**
@@ -19,7 +29,15 @@ function camelcased(string $value): string
  */
 function kebabcased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toKebab();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toKebabCase',
+	);
+
+	return Str::toKebabCase($value);
 }
 
 /**
@@ -27,7 +45,15 @@ function kebabcased(string $value): string
  */
 function snakecased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toSnake();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toSnakeCase',
+	);
+
+	return Str::toSnakeCase($value);
 }
 
 /**
@@ -35,7 +61,15 @@ function snakecased(string $value): string
  */
 function pascalcased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toPascal();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toPascalCase',
+	);
+
+	return Str::toPascalCase($value);
 }
 
 /**
@@ -43,7 +77,15 @@ function pascalcased(string $value): string
  */
 function titlecased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toTitle();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toTitleCase',
+	);
+
+	return Str::toTitleCase($value);
 }
 
 /**
@@ -51,7 +93,15 @@ function titlecased(string $value): string
  */
 function lowercased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toLower();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toLowerCase',
+	);
+
+	return Str::toLowerCase($value);
 }
 
 /**
@@ -59,7 +109,15 @@ function lowercased(string $value): string
  */
 function uppercased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toUpper();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toLowerCase',
+	);
+
+	return Str::toUpperCase($value);
 }
 
 /**
@@ -67,7 +125,15 @@ function uppercased(string $value): string
  */
 function macrocased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toMacro();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toMacroCase',
+	);
+
+	return Str::toMacroCase($value);
 }
 
 /**
@@ -75,7 +141,15 @@ function macrocased(string $value): string
  */
 function cobolcased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toCobol();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toCobolCase',
+	);
+
+	return Str::toCobolCase($value);
 }
 
 /**
@@ -83,5 +157,13 @@ function cobolcased(string $value): string
  */
 function sentencecased(string $value): string
 {
-	return CaseConverter::instance()->convert($value)->toSentence();
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.3',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Str::class . '::toSentenceCase',
+	);
+
+	return Str::toSentenceCase($value);
 }
