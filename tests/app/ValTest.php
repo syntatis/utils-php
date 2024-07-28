@@ -117,8 +117,20 @@ class ValTest extends TestCase
 	 */
 	public function testIsUUID($value): void
 	{
-		$this->assertTrue(is_uuid($value));
 		$this->assertTrue(Val::isUUID($value));
+		$this->assertTrue(is_uuid($value));
+	}
+
+	/**
+	 * @dataProvider dataIsNotUUID
+	 * @testdox it can validate a uuid value
+	 *
+	 * @param mixed $value
+	 */
+	public function testIsNotUUID($value): void
+	{
+		$this->assertFalse(Val::isUUID($value));
+		$this->assertFalse(is_uuid($value));
 	}
 
 	/**
