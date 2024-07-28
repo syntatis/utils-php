@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils\Tests;
 
+use Error;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Syntatis\Utils\Val;
 
 use function chr;
 use function sprintf;
@@ -20,8 +22,15 @@ use function Syntatis\Utils\is_unique;
 use function Syntatis\Utils\is_url;
 use function Syntatis\Utils\is_uuid;
 
-class ValidatorTest extends TestCase
+class ValTest extends TestCase
 {
+	public function testInstantiate(): void
+	{
+		$this->expectException(Error::class);
+
+		new Val();
+	}
+
 	/**
 	 * @dataProvider dataIsEmailValid
 	 * @testdox it can validate a valid email
@@ -31,6 +40,7 @@ class ValidatorTest extends TestCase
 	public function testIsEmailValid($value): void
 	{
 		$this->assertTrue(is_email($value));
+		$this->assertTrue(Val::isEmail($value));
 	}
 
 	/**
@@ -42,6 +52,7 @@ class ValidatorTest extends TestCase
 	public function testIsEmailInvalid($value): void
 	{
 		$this->assertFalse(is_email($value));
+		$this->assertFalse(Val::isEmail($value));
 	}
 
 	/**
@@ -53,6 +64,7 @@ class ValidatorTest extends TestCase
 	public function testIsURLValid($value): void
 	{
 		$this->assertTrue(is_url($value));
+		$this->assertTrue(Val::isURL($value));
 	}
 
 	/**
@@ -64,6 +76,7 @@ class ValidatorTest extends TestCase
 	public function testIsURLInvalid($value): void
 	{
 		$this->assertFalse(is_url($value));
+		$this->assertFalse(Val::isURL($value));
 	}
 
 	/**
@@ -75,13 +88,7 @@ class ValidatorTest extends TestCase
 	public function testIsBlank($value): void
 	{
 		$this->assertTrue(is_blank($value));
-	}
-
-	/** @testdox it can validate a multiple blank value */
-	public function testIsBlankMultiple(): void
-	{
-		$this->assertTrue(is_blank([], '', ' ', false, null));
-		$this->assertFalse(is_blank([], 'this is not blank', ' ', false, null));
+		$this->assertTrue(Val::isBlank($value));
 	}
 
 	/**
@@ -92,7 +99,14 @@ class ValidatorTest extends TestCase
 	 */
 	public function testIsNotBlank($value): void
 	{
-		$this->assertFalse(is_blank($value));
+		$this->assertFalse(Val::isBlank($value));
+	}
+
+	/** @testdox it can validate a multiple blank value */
+	public function testIsBlankMultiple(): void
+	{
+		$this->assertTrue(is_blank([], '', ' ', false, null));
+		$this->assertFalse(is_blank([], 'this is not blank', ' ', false, null));
 	}
 
 	/**
@@ -103,7 +117,20 @@ class ValidatorTest extends TestCase
 	 */
 	public function testIsUUID($value): void
 	{
+		$this->assertTrue(Val::isUUID($value));
 		$this->assertTrue(is_uuid($value));
+	}
+
+	/**
+	 * @dataProvider dataIsNotUUID
+	 * @testdox it can validate a uuid value
+	 *
+	 * @param mixed $value
+	 */
+	public function testIsNotUUID($value): void
+	{
+		$this->assertFalse(Val::isUUID($value));
+		$this->assertFalse(is_uuid($value));
 	}
 
 	/**
@@ -115,6 +142,7 @@ class ValidatorTest extends TestCase
 	public function testIsSemver($value): void
 	{
 		$this->assertTrue(is_semver($value));
+		$this->assertTrue(Val::isSemVer($value));
 	}
 
 	/**
@@ -126,6 +154,7 @@ class ValidatorTest extends TestCase
 	public function testIsNotSemver($value): void
 	{
 		$this->assertFalse(is_semver($value));
+		$this->assertFalse(Val::isSemVer($value));
 	}
 
 	/**
@@ -137,6 +166,7 @@ class ValidatorTest extends TestCase
 	public function testIsIpAddress($value): void
 	{
 		$this->assertTrue(is_ip_address($value));
+		$this->assertTrue(Val::isIPAddress($value));
 	}
 
 	/**
@@ -148,6 +178,7 @@ class ValidatorTest extends TestCase
 	public function testIsNotIpAddress($value): void
 	{
 		$this->assertFalse(is_ip_address($value));
+		$this->assertFalse(Val::isIPAddress($value));
 	}
 
 	/**
@@ -158,20 +189,8 @@ class ValidatorTest extends TestCase
 	 */
 	public function testIsUnique($value): void
 	{
+		$this->assertTrue(Val::isUnique($value));
 		$this->assertTrue(is_unique($value));
-	}
-
-	/**
-	 * @dataProvider dataIsUniqueOptionFields
-	 * @requires PHP 8.1
-	 * @testdox it can validate unique collection
-	 *
-	 * @param mixed                $value
-	 * @param string|array<string> $fields The list of fields to check uniqueness.
-	 */
-	public function testIsUniqueOptionFields($value, $fields = []): void
-	{
-		$this->assertTrue(is_unique($value, $fields));
 	}
 
 	/**
@@ -182,24 +201,58 @@ class ValidatorTest extends TestCase
 	 */
 	public function testIsNotUnique($value): void
 	{
+		$this->assertFalse(Val::isUnique($value));
 		$this->assertFalse(is_unique($value));
+	}
+
+	/**
+	 * @dataProvider dataIsUniqueOptionFields
+	 * @testdox it can validate unique collection
+	 *
+	 * @param mixed                $value
+	 * @param string|array<string> $fields The list of fields to check uniqueness.
+	 */
+	public function testIsUniqueOptionFields($value, $fields = []): void
+	{
+		$this->assertTrue(Val::isUnique($value, $fields));
+		$this->assertTrue(is_unique($value, $fields));
+	}
+
+	/**
+	 * @dataProvider dataIsNotUniqueOptionFields
+	 * @testdox it can validate unique collection
+	 *
+	 * @param mixed                $value
+	 * @param string|array<string> $fields The list of fields to check uniqueness.
+	 */
+	public function testIsNotUniqueOptionFields($value, $fields = []): void
+	{
+		$this->assertFalse(Val::isUnique($value, $fields));
+		$this->assertFalse(is_unique($value, $fields));
 	}
 
 	public static function dataIsEmailValid(): array
 	{
 		return [
-			['â@iana.org'],
 			['fabien@symfony.com'],
 			['example@example.co.uk'],
 			['fabien_potencier@example.fr'],
 			['fab\'ien@symfony.com'],
-			['fab\ ien@symfony.com'],
 			['fabien+a@symfony.com'],
 			['exampl=e@example.com'],
-			['инфо@письмо.рф'],
-			['müller@möller.de'],
-			['1500111@профи-инвест.рф'],
-			[sprintf('example@%s.com', str_repeat('ъ', 40))],
+			['â@iana.org'],
+
+			// Should probably failed according to RFC5322.
+			['"\""@iana.org'],
+			['"\a"@iana.org'],
+			['"test".test@iana.org'],
+			['"test"."test"@iana.org'],
+			['"username"@example.com'],
+			['"user,name"@example.com'],
+			['"user@name"@example.com'],
+			['"user\"name"@example.com'],
+			['"test\ test"@iana.org'],
+			['"test".test@iana.org'],
 		];
 	}
 
@@ -210,23 +263,13 @@ class ValidatorTest extends TestCase
 			[' '],
 			[''],
 			[null],
-			['"""@iana.org'],
-			['""@iana.org'],
-			['"\""@iana.org'],
 			['"\"@iana.org'],
-			['"\a"@iana.org'],
+			['"""@iana.org'],
 			['"test""test"@iana.org'],
 			['"test"' . chr(0) . '@iana.org'],
-			['"test"."test"@iana.org'],
-			['"test".test@iana.org'],
 			['"test"test@iana.org'],
-			['"test\ test"@iana.org'],
 			['"test\"@iana.org'],
 			['"user name"@example.com'],
-			['"user,name"@example.com'],
-			['"user@name"@example.com'],
-			['"user\"name"@example.com'],
-			['"username"@example.com'],
 			['(test_exampel@example.fr'],
 			['.example@localhost'],
 			['0'],
@@ -248,12 +291,9 @@ class ValidatorTest extends TestCase
 			['user[na]me@example.com'],
 			['usern,ame@example.com'],
 			[chr(226) . '@iana.org'],
-			['"""@iana.org'],
 			['"\"@iana.org'],
 			['"test""test"@iana.org'],
 			['"test"' . chr(0) . '@iana.org'],
-			['"test"."test"@iana.org'],
-			['"test".test@iana.org'],
 			['"test"test@iana.org'],
 			['"test\"@iana.org'],
 			['(test_exampel@example.fr)'],
@@ -293,6 +333,13 @@ class ValidatorTest extends TestCase
 			['username@example,com'],
 			[chr(226) . '@iana.org'],
 			[str_repeat('x', 254) . '@example.com'], // email with warnings
+
+			// RFC5322 compliant, but evaluated as invalid with `FILTER_VALIDATE_EMAIL.`
+			['fab\ ien@symfony.com'],
+			['инфо@письмо.рф'],
+			['müller@möller.de'],
+			['1500111@профи-инвест.рф'],
+			[sprintf('example@%s.com', str_repeat('ъ', 40))],
 		];
 	}
 
@@ -390,9 +437,9 @@ class ValidatorTest extends TestCase
 	public static function dataIsURLInvalid(): array
 	{
 		return [
+			'null' => [null],
 			"' '" => [' '],
 			"''" => [''],
-			'null' => [null],
 			'example.com' => ['example.com'],
 			'://example.com' => ['://example.com'],
 			'http ://example.com' => ['http ://example.com'],
@@ -493,9 +540,11 @@ class ValidatorTest extends TestCase
 	public static function dataIsNotUUID(): array
 	{
 		return [
+			'null' => [null],
+			'bool' => [false],
+			'int' => [12345],
 			"' '" => [' '],
 			"''" => [''],
-			'null' => [null],
 			'{216fff40-98d9-11e3-a5e2-0800200c9a66}' => ['{216fff40-98d9-11e3-a5e2-0800200c9a66}'],
 			'216fff4098d911e3a5e20800200c9a66' => ['216fff4098d911e3a5e20800200c9a66'],
 			'216f-ff40-98d9-11e3-a5e2-0800-200c-9a66' => ['216f-ff40-98d9-11e3-a5e2-0800-200c-9a66'],
@@ -575,6 +624,7 @@ class ValidatorTest extends TestCase
 	public static function dataIsNotSemver(): array
 	{
 		return [
+			'null' => [null],
 			'1' => ['1'],
 			'1.2.3-0123' => ['1.2.3-0123'],
 			'1.2.3-0123.0123' => ['1.2.3-0123.0123'],
@@ -641,9 +691,9 @@ class ValidatorTest extends TestCase
 	public static function dataIsNotIpAddress(): array
 	{
 		return [
+			'null' => [null],
 			"''" => [''],
 			"' '" => [' '],
-			'null' => [null],
 			'false' => [false],
 			'zero' => [0],
 			'float' => [0.1],
@@ -672,7 +722,7 @@ class ValidatorTest extends TestCase
 				[
 					[
 						'label' => 'foo',
-						'latitude' => '1',
+						'latitude' => '3',
 						'longitude' => '2',
 					],
 					[
@@ -689,9 +739,31 @@ class ValidatorTest extends TestCase
 	public static function dataIsNotUnique(): array
 	{
 		return [
+			'empty' => [[]],
 			'sequential' => [[1, 2, 2]], // index 1 and 2 are not unique.
 			'associative' => [['a' => 1, 'b' => 2, 'c' => 2]], // b and c are not unique.
 			'multidimensional' => [['a' => 1, 'b' => [1, 2], 'c' => [1, 2]]], // b and c are not unique.
+		];
+	}
+
+	public static function dataIsNotUniqueOptionFields(): array
+	{
+		return [
+			[
+				[
+					[
+						'label' => 'foo',
+						'latitude' => '3',
+						'longitude' => '2',
+					],
+					[
+						'label' => 'bar',
+						'latitude' => '3',
+						'longitude' => '4',
+					],
+				],
+				'latitude',
+			],
 		];
 	}
 }
