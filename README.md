@@ -73,7 +73,7 @@ The case converter functions allow you to convert strings to various cases, such
 use function Syntatis\Utils\Str;
 
 // Convert a string to camel case
-Str('foo_bar'); // fooBar
+Str::toCamelCase('foo_bar'); // fooBar
 ```
 
 ### Inflector
