@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Syntatis\Utils\Support\Str\CaseConverter\CaseConverter;
-use Syntatis\Utils\Support\Str\Inflector\Inflector;
+use Syntatis\Utils\Support\Str\CaseConverter;
+use Syntatis\Utils\Support\Str\Inflector;
 
 final class Str
 {
