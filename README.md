@@ -54,37 +54,37 @@ is_email('invalid-email'); // false
 
 The case converter functions allow you to convert strings to various cases, such as camel case, snake case, or kebab case.
 
-| Function      | Description                                                |
-|---------------|------------------------------------------------------------|
-| `camelcased`  | Converts a string to camel case e.g. `foo_bar` to `fooBar`.|
-| `snakecased`  | Converts a string to snake case e.g. `fooBar` to `foo_bar`.|
-| `kebabcased`  | Converts a string to kebab case e.g. `fooBar` to `foo-bar`.|
-| `pascalcased` | Converts a string to Pascal case e.g. `foo_bar` to `FooBar`.|
-| `titlecased`  | Converts a string to title case e.g. `foo_bar` to `Foo Bar`.|
-| `sentencecased` | Converts a string to sentence case e.g. `foo_bar` to `Foo bar`.|
-| `lowercased`  | Converts a string to lower case e.g. `FooBar` to `foobar`.|
-| `uppercased`  | Converts a string to upper case e.g. `fooBar` to `FOOBAR`.|
-| `macrocased`  | Converts a string to macro case e.g. `fooBar` to `FOO_BAR`.|
-| `cobolcased`  | Converts a string to Cobol case e.g. `fooBar` to `FOO-BAR`.|
+| Function      | Description                                                            |
+|---------------|------------------------------------------------------------------------|
+| `Str::toCamelCase`    | Converts a string to camel case e.g. `foo_bar` to `fooBar`.    |
+| `Str::toSnakeCase`    | Converts a string to snake case e.g. `fooBar` to `foo_bar`.    |
+| `Str::toKebabCase`    | Converts a string to kebab case e.g. `fooBar` to `foo-bar`.    |
+| `Str::toPascalCase`   | Converts a string to Pascal case e.g. `foo_bar` to `FooBar`.   |
+| `Str::toTitleCase`    | Converts a string to title case e.g. `foo_bar` to `Foo Bar`.   |
+| `Str::toSentenceCase` | Converts a string to sentence case e.g. `foo_bar` to `Foo bar`.|
+| `Str::toLowerCase`    | Converts a string to lower case e.g. `FooBar` to `foobar`.     |
+| `Str::toUpperCase`    | Converts a string to upper case e.g. `fooBar` to `FOOBAR`.     |
+| `Str::toMacroCase`    | Converts a string to macro case e.g. `fooBar` to `FOO_BAR`.    |
+| `Str::toCobolCase`    | Converts a string to Cobol case e.g. `fooBar` to `FOO-BAR`.    |
 
 #### Examples
 
 ```php
-use function Syntatis\Utils\camelcased;
+use function Syntatis\Utils\Str;
 
 // Convert a string to camel case
-camelcased('foo_bar'); // fooBar
+Str('foo_bar'); // fooBar
 ```
 
 ### Inflector
 
 The inflector functions perform common inflection tasks, such as pluralizing or singularizing words.
 
-| Function     | Description                                |
-|--------------|--------------------------------------------|
-| `pluralize`  | Pluralizes a word e.g. `apple` to `apples`.|
-| `singularize`| Singularizes a word e.g. `apples` to `apple`.|
-| `slugify`    | Slugifies a string e.g. `Hello, World!` to `hello-world`.|
+| Function         | Description                                              |
+|------------------|----------------------------------------------------------|
+| `Str::toPlural`  | Pluralizes a word e.g. `apple` to `apples`.              |
+| `Str::toSingular`| Singularizes a word e.g. `apples` to `apple`.            |
+| `Str::toSlug`    | Slugifies a string e.g. `Hello, World!` to `hello-world`.|
 
 #### Examples
 
@@ -92,5 +92,5 @@ The inflector functions perform common inflection tasks, such as pluralizing or 
 use function Syntatis\Utils\pluralize;
 
 // Pluralize a word
-pluralize('apple'); // apples
+Str::toPlural('apple'); // apples
 ```
