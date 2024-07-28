@@ -102,6 +102,8 @@ final class Str
 
 	/**
 	 * Prevent instantiation.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	final private function __construct()
 	{
