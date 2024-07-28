@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\Utils\Validator;
+namespace Syntatis\Utils\Support\Validator;
 
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

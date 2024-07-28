@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils\Tests;
 
+use Error;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Syntatis\Utils\Val;
 
 use function chr;
 use function sprintf;
@@ -20,8 +22,15 @@ use function Syntatis\Utils\is_unique;
 use function Syntatis\Utils\is_url;
 use function Syntatis\Utils\is_uuid;
 
-class ValidatorTest extends TestCase
+class ValTest extends TestCase
 {
+	public function testInstantiate(): void
+	{
+		$this->expectException(Error::class);
+
+		new Val();
+	}
+
 	/**
 	 * @dataProvider dataIsEmailValid
 	 * @testdox it can validate a valid email
@@ -31,6 +40,7 @@ class ValidatorTest extends TestCase
 	public function testIsEmailValid($value): void
 	{
 		$this->assertTrue(is_email($value));
+		$this->assertTrue(Val::isEmail($value));
 	}
 
 	/**
@@ -42,6 +52,7 @@ class ValidatorTest extends TestCase
 	public function testIsEmailInvalid($value): void
 	{
 		$this->assertFalse(is_email($value));
+		$this->assertFalse(Val::isEmail($value));
 	}
 
 	/**
@@ -75,13 +86,7 @@ class ValidatorTest extends TestCase
 	public function testIsBlank($value): void
 	{
 		$this->assertTrue(is_blank($value));
-	}
-
-	/** @testdox it can validate a multiple blank value */
-	public function testIsBlankMultiple(): void
-	{
-		$this->assertTrue(is_blank([], '', ' ', false, null));
-		$this->assertFalse(is_blank([], 'this is not blank', ' ', false, null));
+		$this->assertTrue(Val::isBlank($value));
 	}
 
 	/**
@@ -92,7 +97,14 @@ class ValidatorTest extends TestCase
 	 */
 	public function testIsNotBlank($value): void
 	{
-		$this->assertFalse(is_blank($value));
+		$this->assertFalse(Val::isBlank($value));
+	}
+
+	/** @testdox it can validate a multiple blank value */
+	public function testIsBlankMultiple(): void
+	{
+		$this->assertTrue(is_blank([], '', ' ', false, null));
+		$this->assertFalse(is_blank([], 'this is not blank', ' ', false, null));
 	}
 
 	/**
@@ -188,18 +200,25 @@ class ValidatorTest extends TestCase
 	public static function dataIsEmailValid(): array
 	{
 		return [
-			['â@iana.org'],
 			['fabien@symfony.com'],
 			['example@example.co.uk'],
 			['fabien_potencier@example.fr'],
 			['fab\'ien@symfony.com'],
-			['fab\ ien@symfony.com'],
 			['fabien+a@symfony.com'],
 			['exampl=e@example.com'],
-			['инфо@письмо.рф'],
-			['müller@möller.de'],
-			['1500111@профи-инвест.рф'],
-			[sprintf('example@%s.com', str_repeat('ъ', 40))],
+			['â@iana.org'],
+
+			// Should probably failed according to RFC5322.
+			['"\""@iana.org'],
+			['"\a"@iana.org'],
+			['"test".test@iana.org'],
+			['"test"."test"@iana.org'],
+			['"username"@example.com'],
+			['"user,name"@example.com'],
+			['"user@name"@example.com'],
+			['"user\"name"@example.com'],
+			['"test\ test"@iana.org'],
+			['"test".test@iana.org'],
 		];
 	}
 
@@ -210,23 +229,13 @@ class ValidatorTest extends TestCase
 			[' '],
 			[''],
 			[null],
-			['"""@iana.org'],
-			['""@iana.org'],
-			['"\""@iana.org'],
 			['"\"@iana.org'],
-			['"\a"@iana.org'],
+			['"""@iana.org'],
 			['"test""test"@iana.org'],
 			['"test"' . chr(0) . '@iana.org'],
-			['"test"."test"@iana.org'],
-			['"test".test@iana.org'],
 			['"test"test@iana.org'],
-			['"test\ test"@iana.org'],
 			['"test\"@iana.org'],
 			['"user name"@example.com'],
-			['"user,name"@example.com'],
-			['"user@name"@example.com'],
-			['"user\"name"@example.com'],
-			['"username"@example.com'],
 			['(test_exampel@example.fr'],
 			['.example@localhost'],
 			['0'],
@@ -248,12 +257,9 @@ class ValidatorTest extends TestCase
 			['user[na]me@example.com'],
 			['usern,ame@example.com'],
 			[chr(226) . '@iana.org'],
-			['"""@iana.org'],
 			['"\"@iana.org'],
 			['"test""test"@iana.org'],
 			['"test"' . chr(0) . '@iana.org'],
-			['"test"."test"@iana.org'],
-			['"test".test@iana.org'],
 			['"test"test@iana.org'],
 			['"test\"@iana.org'],
 			['(test_exampel@example.fr)'],
@@ -293,6 +299,13 @@ class ValidatorTest extends TestCase
 			['username@example,com'],
 			[chr(226) . '@iana.org'],
 			[str_repeat('x', 254) . '@example.com'], // email with warnings
+
+			// RFC5322 compliant, but evaluated as invalid with `FILTER_VALIDATE_EMAIL.`
+			['fab\ ien@symfony.com'],
+			['инфо@письмо.рф'],
+			['müller@möller.de'],
+			['1500111@профи-инвест.рф'],
+			[sprintf('example@%s.com', str_repeat('ъ', 40))],
 		];
 	}
 

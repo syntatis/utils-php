@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Ip;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Validator\Constraints\Unique;
 use Symfony\Component\Validator\Constraints\Url;
-use Symfony\Component\Validator\Constraints\Uuid;
-use Syntatis\Utils\Validator\Validator;
+use Syntatis\Utils\Support\Validator\Validator;
+
+use function trigger_deprecation;
 
 use const PHP_VERSION_ID;
 
 /**
- * Validate if the value is a valid email address according to RFC5322
- * {@link https://datatracker.ietf.org/doc/html/rfc5322}
+ * Validate if the value is a valid email address.
  *
  * @param mixed $value
  *
@@ -27,15 +26,15 @@ use const PHP_VERSION_ID;
  */
 function is_email($value): bool
 {
-	return Validator::instance()->validate(
-		$value,
-		new Sequentially(
-			[
-				new NotBlank(null, null, null, 'trim'),
-				new Email(null, null, Email::VALIDATION_MODE_STRICT),
-			],
-		),
-	)->count() <= 0;
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isEmail',
+	);
+
+	return Val::isEmail($value);
 }
 
 /**
@@ -44,22 +43,18 @@ function is_email($value): bool
  *
  * @param mixed           $value
  * @param array<int>|null $versions
- *
- * @phpstan-param array<value-of<Uuid::ALL_VERSIONS>>|null $versions
- * @psalm-param array{value-of<Uuid::ALL_VERSIONS>}|null $versions
  */
 function is_uuid($value, ?array $versions = null): bool
 {
-	return Validator::instance()
-		->validate(
-			$value,
-			new Uuid(
-				null,
-				null,
-				$versions, // Versions.
-				true, // Stricts.
-			),
-		)->count() <= 0;
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isUUID',
+	);
+
+	return Val::isUUID($value);
 }
 
 /**
@@ -69,8 +64,16 @@ function is_uuid($value, ?array $versions = null): bool
  */
 function is_blank(...$value): bool
 {
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isBlank',
+	);
+
 	foreach ($value as $k => $v) {
-		if (Validator::instance()->validate($v, new NotBlank(null, null, null, 'trim'))->count() >= 1) {
+		if (Val::isBlank($v)) {
 			continue;
 		}
 
