@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils\Tests\Str;
 
-use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 use Syntatis\Utils\Str;
 
