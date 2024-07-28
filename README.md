@@ -18,30 +18,29 @@ composer require syntatis/utils
 
 This package includes several functions for validating values, such as checking if a value is an email, URL, or whether it is blank.
 
-| Function     | Description                                            |
-|--------------|--------------------------------------------------------|
-| `is_blank`   | Checks if a value is blank or empty.                   |
-| `is_email`   | Checks if a value is a valid email address.            |
-| `is_url`     | Checks if a value is a valid URL.                      |
-| `is_uuid`    | Checks if a value is a valid UUID.                     |
-| `is_semver`  | Checks if a value is in valid SemVer format.           |
-| `is_ip_address` | Checks if a value is a valid IPv4 or IPv6 address.  |
-| `is_unique`  | Checks if all elements in a collection are unique.     |
+| Function           | Description                                            |
+|--------------------|--------------------------------------------------------|
+| `Val::isBlank`     | Checks if a value is blank or empty.                   |
+| `Val::isEmail`     | Checks if a value is a valid email address.            |
+| `Val::isURL`       | Checks if a value is a valid URL.                      |
+| `Val::isUUID`      | Checks if a value is a valid UUID.                     |
+| `Val::isSemVer`    | Checks if a value is in valid SemVer format.           |
+| `Val::isIPAddress` | Checks if a value is a valid IPv4 or IPv6 address.     |
+| `Val::isUnique`    | Checks if all elements in a collection are unique.     |
 
 #### Examples
 
 ```php
-use function Syntatis\Utils\is_blank;
-use function Syntatis\Utils\is_email;
+use function Syntatis\Utils\Val;
 
 // Check if a value is blank or empty
-is_blank(''); // true
-is_blank(' '); // true
-is_blank('foo '); // false
+Val::isBlank(''); // true
+Val::isBlank(' '); // true
+Val::isBlank('foo '); // false
 
 // Check if a value is a valid email address
-is_email('example@example.com'); // true
-is_email('invalid-email'); // false
+Val::isEmail('example@example.com'); // true
+Val::isEmail('invalid-email'); // false
 ```
 
 ### Case Converter
