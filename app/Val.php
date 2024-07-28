@@ -141,6 +141,8 @@ final class Val
 	}
 
 	/**
+	 * Validates if the given value is a valid Semantic Versioning (SemVer) format.
+	 *
 	 * @param mixed $value
 	 *
 	 * @phpstan-assert-if-true non-empty-string $value
@@ -174,5 +176,26 @@ final class Val
 		}
 
 		return (bool) filter_var(trim($value), FILTER_VALIDATE_IP);
+	}
+
+	/**
+	 * Validates that all elements in the provided collection are unique, employing
+	 * strict comparison by default (treating '7' and 7 as distinct elements).
+	 *
+	 * @param mixed                $value
+	 * @param string|array<string> $fields Specifies the key or keys in a collection
+	 *                                     to be examined for uniqueness.
+	 *                                     Required PHP 8.1 or higher.
+	 *
+	 * @phpstan-assert-if-true non-empty-array $value
+	 * @psalm-assert-if-true non-empty-array $value
+	 */
+	public static function isUnique($value, $fields = []): bool
+	{
+		if (! is_array($value)) {
+			return false;
+		}
+
+		return Arr::isUnique($value, $fields);
 	}
 }

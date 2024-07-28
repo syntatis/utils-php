@@ -4,14 +4,7 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Sequentially;
-use Symfony\Component\Validator\Constraints\Unique;
-use Syntatis\Utils\Support\Validator\Validator;
-
 use function trigger_deprecation;
-
-use const PHP_VERSION_ID;
 
 /**
  * Validate if the value is a valid email address.
@@ -154,23 +147,13 @@ function is_ip_address($value): bool
  */
 function is_unique($value, $fields = []): bool
 {
-	$notBlank = new NotBlank(null, null, null);
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isUnique',
+	);
 
-	if (PHP_VERSION_ID < 80100) {
-		return Validator::instance()->validate(
-			$value,
-			new Sequentially([
-				$notBlank,
-				new Unique(),
-			]),
-		)->count() <= 0;
-	}
-
-	return Validator::instance()->validate(
-		$value,
-		new Sequentially([
-			$notBlank,
-			new Unique(['fields' => $fields]),
-		]),
-	)->count() <= 0;
+	return Val::isUnique($value, $fields);
 }

@@ -178,19 +178,7 @@ class ValTest extends TestCase
 	public function testIsUnique($value): void
 	{
 		$this->assertTrue(is_unique($value));
-	}
-
-	/**
-	 * @dataProvider dataIsUniqueOptionFields
-	 * @requires PHP 8.1
-	 * @testdox it can validate unique collection
-	 *
-	 * @param mixed                $value
-	 * @param string|array<string> $fields The list of fields to check uniqueness.
-	 */
-	public function testIsUniqueOptionFields($value, $fields = []): void
-	{
-		$this->assertTrue(is_unique($value, $fields));
+		$this->assertTrue(Val::isUnique($value));
 	}
 
 	/**
@@ -202,6 +190,32 @@ class ValTest extends TestCase
 	public function testIsNotUnique($value): void
 	{
 		$this->assertFalse(is_unique($value));
+	}
+
+	/**
+	 * @dataProvider dataIsUniqueOptionFields
+	 * @testdox it can validate unique collection
+	 *
+	 * @param mixed                $value
+	 * @param string|array<string> $fields The list of fields to check uniqueness.
+	 */
+	public function testIsUniqueOptionFields($value, $fields = []): void
+	{
+		$this->assertTrue(Val::isUnique($value, $fields));
+		$this->assertTrue(is_unique($value, $fields));
+	}
+
+	/**
+	 * @dataProvider dataIsNotUniqueOptionFields
+	 * @testdox it can validate unique collection
+	 *
+	 * @param mixed                $value
+	 * @param string|array<string> $fields The list of fields to check uniqueness.
+	 */
+	public function testIsNotUniqueOptionFields($value, $fields = []): void
+	{
+		$this->assertFalse(Val::isUnique($value, $fields));
+		$this->assertFalse(is_unique($value, $fields));
 	}
 
 	public static function dataIsEmailValid(): array
@@ -693,7 +707,7 @@ class ValTest extends TestCase
 				[
 					[
 						'label' => 'foo',
-						'latitude' => '1',
+						'latitude' => '3',
 						'longitude' => '2',
 					],
 					[
@@ -713,6 +727,27 @@ class ValTest extends TestCase
 			'sequential' => [[1, 2, 2]], // index 1 and 2 are not unique.
 			'associative' => [['a' => 1, 'b' => 2, 'c' => 2]], // b and c are not unique.
 			'multidimensional' => [['a' => 1, 'b' => [1, 2], 'c' => [1, 2]]], // b and c are not unique.
+		];
+	}
+
+	public static function dataIsNotUniqueOptionFields(): array
+	{
+		return [
+			[
+				[
+					[
+						'label' => 'foo',
+						'latitude' => '3',
+						'longitude' => '2',
+					],
+					[
+						'label' => 'bar',
+						'latitude' => '3',
+						'longitude' => '4',
+					],
+				],
+				['latitude'],
+			],
 		];
 	}
 }

@@ -62,7 +62,6 @@
 	"require": {
 		"php": ">=7.4",
 		"doctrine/inflector": "^2.0",
-		"egulias/email-validator": "^3.2",
 		"jawira/case-converter": "^3.5",
 		"psr/http-message": "^2.0",
 		"symfony/deprecation-contracts": "^2.5",
