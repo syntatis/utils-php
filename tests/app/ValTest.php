@@ -130,6 +130,7 @@ class ValTest extends TestCase
 	public function testIsSemver($value): void
 	{
 		$this->assertTrue(is_semver($value));
+		$this->assertTrue(Val::isSemVer($value));
 	}
 
 	/**
@@ -141,6 +142,7 @@ class ValTest extends TestCase
 	public function testIsNotSemver($value): void
 	{
 		$this->assertFalse(is_semver($value));
+		$this->assertFalse(Val::isSemVer($value));
 	}
 
 	/**
@@ -152,6 +154,7 @@ class ValTest extends TestCase
 	public function testIsIpAddress($value): void
 	{
 		$this->assertTrue(is_ip_address($value));
+		$this->assertTrue(Val::isIPAddress($value));
 	}
 
 	/**
@@ -163,6 +166,7 @@ class ValTest extends TestCase
 	public function testIsNotIpAddress($value): void
 	{
 		$this->assertFalse(is_ip_address($value));
+		$this->assertFalse(Val::isIPAddress($value));
 	}
 
 	/**

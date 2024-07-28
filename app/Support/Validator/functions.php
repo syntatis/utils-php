@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Symfony\Component\Validator\Constraints\Ip;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Validator\Constraints\Unique;
@@ -130,18 +129,15 @@ function is_semver($value): bool
  */
 function is_ip_address($value): bool
 {
-	return Validator::instance()->validate(
-		$value,
-		new Sequentially(
-			[
-				new NotBlank(null, null, null, 'trim'),
-				new Ip([
-					'normalizer' => 'trim',
-					'version' => Ip::ALL,
-				]),
-			],
-		),
-	)->count() <= 0;
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isIPAddress',
+	);
+
+	return Val::isIPAddress($value);
 }
 
 /**

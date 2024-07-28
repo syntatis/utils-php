@@ -17,6 +17,7 @@ use function trim;
 
 use const FILTER_FLAG_EMAIL_UNICODE;
 use const FILTER_VALIDATE_EMAIL;
+use const FILTER_VALIDATE_IP;
 
 final class Val
 {
@@ -42,7 +43,7 @@ final class Val
 			return false;
 		}
 
-		return (bool) filter_var($value, FILTER_VALIDATE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
+		return (bool) filter_var(trim($value), FILTER_VALIDATE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
 	}
 
 	/**
@@ -156,5 +157,22 @@ final class Val
 			'/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/',
 			trim($value),
 		);
+	}
+
+	/**
+	 * Validate if the value is a valid IPv4 or IPv6 address.
+	 *
+	 * @param mixed $value
+	 *
+	 * @phpstan-assert-if-true non-empty-string $value
+	 * @psalm-assert-if-true non-empty-string $value
+	 */
+	public static function isIPAddress($value): bool
+	{
+		if (! is_string($value) || self::isBlank($value)) {
+			return false;
+		}
+
+		return (bool) filter_var(trim($value), FILTER_VALIDATE_IP);
 	}
 }
