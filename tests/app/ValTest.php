@@ -727,6 +727,7 @@ class ValTest extends TestCase
 	public static function dataIsNotUnique(): array
 	{
 		return [
+			'empty' => [],
 			'sequential' => [[1, 2, 2]], // index 1 and 2 are not unique.
 			'associative' => [['a' => 1, 'b' => 2, 'c' => 2]], // b and c are not unique.
 			'multidimensional' => [['a' => 1, 'b' => [1, 2], 'c' => [1, 2]]], // b and c are not unique.
@@ -749,7 +750,7 @@ class ValTest extends TestCase
 						'longitude' => '4',
 					],
 				],
-				['latitude'],
+				'latitude',
 			],
 		];
 	}
