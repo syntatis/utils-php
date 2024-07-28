@@ -63,12 +63,13 @@
 		"php": ">=7.4",
 		"doctrine/inflector": "^2.0",
 		"jawira/case-converter": "^3.5",
-		"psr/http-message": "^2.0",
+		"psr/http-message": "^1.0",
 		"symfony/deprecation-contracts": "^2.5"
 	},
 	"require-dev": {
 		"composer/installers": "^2.3",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"league/uri": "^6.7",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpstan/extension-installer": "^1.4",
 		"phpstan/phpstan": "^1.11",
