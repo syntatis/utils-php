@@ -519,6 +519,9 @@ class ValTest extends TestCase
 	public static function dataIsUUID(): array
 	{
 		return [
+			'null' => [null],
+			'bool' => [false],
+			'int' => [12345],
 			'216fff40-98d9-11e3-a5e2-0800200c9a66' => ['216fff40-98d9-11e3-a5e2-0800200c9a66'],
 			'e22a9860-8e9f-11ed-95f6-5d3ec56dc459' => ['e22a9860-8e9f-11ed-95f6-5d3ec56dc459'],
 		];
