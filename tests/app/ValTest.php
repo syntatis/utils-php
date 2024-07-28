@@ -64,6 +64,7 @@ class ValTest extends TestCase
 	public function testIsURLValid($value): void
 	{
 		$this->assertTrue(is_url($value));
+		$this->assertTrue(Val::isURL($value));
 	}
 
 	/**
@@ -75,6 +76,7 @@ class ValTest extends TestCase
 	public function testIsURLInvalid($value): void
 	{
 		$this->assertFalse(is_url($value));
+		$this->assertFalse(Val::isURL($value));
 	}
 
 	/**
@@ -116,6 +118,7 @@ class ValTest extends TestCase
 	public function testIsUUID($value): void
 	{
 		$this->assertTrue(is_uuid($value));
+		$this->assertTrue(Val::isUUID($value));
 	}
 
 	/**
@@ -403,6 +406,7 @@ class ValTest extends TestCase
 	public static function dataIsURLInvalid(): array
 	{
 		return [
+			'null' => [null],
 			"' '" => [' '],
 			"''" => [''],
 			'null' => [null],
@@ -506,6 +510,7 @@ class ValTest extends TestCase
 	public static function dataIsNotUUID(): array
 	{
 		return [
+			'null' => [null],
 			"' '" => [' '],
 			"''" => [''],
 			'null' => [null],
@@ -588,6 +593,7 @@ class ValTest extends TestCase
 	public static function dataIsNotSemver(): array
 	{
 		return [
+			'null' => [null],
 			'1' => ['1'],
 			'1.2.3-0123' => ['1.2.3-0123'],
 			'1.2.3-0123.0123' => ['1.2.3-0123.0123'],
@@ -654,6 +660,7 @@ class ValTest extends TestCase
 	public static function dataIsNotIpAddress(): array
 	{
 		return [
+			'null' => [null],
 			"''" => [''],
 			"' '" => [' '],
 			'null' => [null],

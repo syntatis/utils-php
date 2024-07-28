@@ -6,10 +6,8 @@ namespace Syntatis\Utils;
 
 use Symfony\Component\Validator\Constraints\Ip;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Validator\Constraints\Unique;
-use Symfony\Component\Validator\Constraints\Url;
 use Syntatis\Utils\Support\Validator\Validator;
 
 use function trigger_deprecation;
@@ -88,20 +86,19 @@ function is_blank(...$value): bool
  * @param array<array-key, "http"|"https"|"ftp"|"file"|"git"> $protocols
  *
  * @phpstan-assert-if-true non-empty-string $value
+ * @psalm-assert-if-true non-empty-string $value
  */
 function is_url($value, array $protocols = ['http', 'https']): bool
 {
-	return Validator::instance()->validate(
-		$value,
-		[
-			new Sequentially(
-				[
-					new NotBlank(null, null, null, 'trim'),
-					new Url(null, null, $protocols, null, 'trim'),
-				],
-			),
-		],
-	)->count() <= 0;
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isURL',
+	);
+
+	return Val::isURL($value);
 }
 
 /**
@@ -112,13 +109,15 @@ function is_url($value, array $protocols = ['http', 'https']): bool
  */
 function is_semver($value): bool
 {
-	return Validator::instance()->validate(
-		$value,
-		new Regex(
-			/** @see https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string */
-			'/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/',
-		),
-	)->count() <= 0;
+	trigger_deprecation(
+		'syntatis/utils',
+		'1.4',
+		'The "%s" function is deprecated, use "%s" instead.',
+		__FUNCTION__,
+		Val::class . '::isSemVer',
+	);
+
+	return Val::isSemVer($value);
 }
 
 /**
