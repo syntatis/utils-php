@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Syntatis\Utils\Tests;
 
 use Error;
+use League\Uri\Http;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -347,6 +348,7 @@ class ValTest extends TestCase
 	public static function dataIsURLValid(): array
 	{
 		return [
+			[Http::createFromString('http://www.example.com')],
 			['http://a.pl'],
 			['http://www.example.com'],
 			['http://tt.example.com'],
@@ -733,6 +735,31 @@ class ValTest extends TestCase
 				],
 				['latitude', 'longitude'],
 			],
+			[
+				[
+					[
+						'label' => 'foo',
+						'latitude' => '3',
+						'longitude' => '2',
+					],
+					[
+						'label' => 'bar',
+						'latitude' => '3',
+					],
+				],
+				['latitude', 'longitude'],
+			],
+			[
+				[
+					[
+						'label' => 'foo',
+						'latitude' => '3',
+						'longitude' => '2',
+					],
+					['label' => 'bar'],
+				],
+				['latitude', 'longitude'],
+			],
 		];
 	}
 
@@ -740,6 +767,7 @@ class ValTest extends TestCase
 	{
 		return [
 			'empty' => [[]],
+			'non-array' => ['string'],
 			'sequential' => [[1, 2, 2]], // index 1 and 2 are not unique.
 			'associative' => [['a' => 1, 'b' => 2, 'c' => 2]], // b and c are not unique.
 			'multidimensional' => [['a' => 1, 'b' => [1, 2], 'c' => [1, 2]]], // b and c are not unique.
