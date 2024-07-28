@@ -46,6 +46,9 @@ final class Val
 	 * {@link https://www.rfc-editor.org/rfc/rfc4122}
 	 *
 	 * @param mixed $value
+	 *
+	 * @phpstan-assert-if-true non-empty-string $value
+	 * @psalm-assert-if-true non-empty-string $value
 	 */
 	public static function isUUID($value): bool
 	{
@@ -55,7 +58,7 @@ final class Val
 
 		return (bool) preg_match(
 			'/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
-			$value
+			$value,
 		);
 	}
 
