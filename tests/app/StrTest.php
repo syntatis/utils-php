@@ -171,6 +171,62 @@ class StrTest extends TestCase
 		$this->assertSame($expect, slugify($value));
 	}
 
+	/**
+	 * @dataProvider dataStartsWith
+	 * @testdox it can check if a string starts with a given substring
+	 */
+	public function testStartsWith(string $value, string $needle, bool $expect): void
+	{
+		$this->assertSame($expect, Str::startsWith($value, $needle));
+	}
+
+	/**
+	 * @dataProvider dataEndsWith
+	 * @testdox it can check if a string ends with a given substring
+	 */
+	public function testEndsWith(string $value, string $needle, bool $expect): void
+	{
+		$this->assertSame($expect, Str::endsWith($value, $needle));
+	}
+
+	public function dataStartsWith(): iterable
+	{
+		return [
+			['foo bar', 'foo', true],
+			['foo bar', 'bar', false],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['', '', true],
+			['', 'foo', false],
+			['foo', '', true],
+			['foo', 'foo', true],
+			['foo', 'bar', false],
+		];
+	}
+
+	public function dataEndsWith(): iterable
+	{
+		return [
+			['foo bar', 'foo', false],
+			['foo bar', 'bar', true],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['foo bar', 'foo bar', true],
+			['foo bar', 'foo bar ', false],
+			['', '', true],
+			['', 'foo', false],
+			['foo', '', true],
+			['foo', 'foo', true],
+			['foo', 'bar', false],
+		];
+	}
+
 	public function dataCamelCased(): iterable
 	{
 		return [['foo_bar', 'fooBar'], ['foo-bar', 'fooBar'], ['foo bar', 'fooBar'], ['fooBar', 'fooBar'], ['FooBar', 'fooBar']];

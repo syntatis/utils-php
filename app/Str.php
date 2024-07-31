@@ -7,6 +7,14 @@ namespace Syntatis\Utils;
 use Syntatis\Utils\Support\Str\CaseConverter;
 use Syntatis\Utils\Support\Str\Inflector;
 
+use function str_ends_with;
+use function str_starts_with;
+use function strlen;
+use function strncmp;
+use function substr_compare;
+
+use const PHP_VERSION_ID;
+
 final class Str
 {
 	/**
@@ -110,9 +118,50 @@ final class Str
 	}
 
 	/**
+	 * Check if a string starts with a specific substring.
+	 *
+	 * @param string $haystack The string to search in e.g. HelloWorld.
+	 * @param string $needle   The substring to search for e.g. Hello.
+	 */
+	public static function startsWith(string $haystack, string $needle): bool
+	{
+		if (PHP_VERSION_ID >= 80000) {
+			return str_starts_with($haystack, $needle);
+		}
+
+		return strncmp($haystack, $needle, strlen($needle)) === 0;
+	}
+
+	/**
+	 * Check if a string ends with a specific substring.
+	 *
+	 * @param string $haystack The string to search in e.g. HelloWorld.
+	 * @param string $needle   The substring to search for e.g. World.
+	 */
+	public static function endsWith(string $haystack, string $needle): bool
+	{
+		if (PHP_VERSION_ID >= 80000) {
+			return str_ends_with($haystack, $needle);
+		}
+
+		if ($needle === '' || $needle === $haystack) {
+			return true;
+		}
+
+		if ($haystack === '') {
+			return false;
+		}
+
+		$needleLength = strlen($needle);
+
+		return $needleLength <= strlen($haystack) && substr_compare($haystack, $needle, -$needleLength) === 0;
+	}
+
+	/**
 	 * Convert a word to its singular form.
 	 *
 	 * @param string $word The word to convert e.g. "dogs".
+	 *
 	 * @return string The singular form of the word e.g. "dog".
 	 */
 	public static function toSingular(string $word): string
@@ -128,6 +177,7 @@ final class Str
 	 * Convert a word to its plural form.
 	 *
 	 * @param string $word The word to convert e.g. "dog".
+	 *
 	 * @return string The plural form of the word e.g. "dogs".
 	 */
 	public static function toPlural(string $word): string
@@ -143,6 +193,7 @@ final class Str
 	 * Convert a word to a URL friendly format.
 	 *
 	 * @param string $word The word to convert e.g. "Hello World".
+	 *
 	 * @return string The URL friendly format of the word e.g. "hello-world".
 	 */
 	public static function toSlug(string $word): string
@@ -158,6 +209,7 @@ final class Str
 	 * Convert a word to camel case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in camel case e.g. "helloWorld".
 	 */
 	public static function toCamelCase(string $word): string
@@ -173,6 +225,7 @@ final class Str
 	 * Convert a word to kebab case.
 	 *
 	 * @param string $word The word to convert e.g. "helloWorld".
+	 *
 	 * @return string The word in kebab case e.g. "hello-world".
 	 */
 	public static function toKebabCase(string $word): string
@@ -188,6 +241,7 @@ final class Str
 	 * Convert a word to snake case.
 	 *
 	 * @param string $word The word to convert e.g. "helloWorld".
+	 *
 	 * @return string The word in snake case e.g. "hello_world".
 	 */
 	public static function toSnakeCase(string $word): string
@@ -203,6 +257,7 @@ final class Str
 	 * Convert a word to pascal case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in pascal case e.g. "HelloWorld".
 	 */
 	public static function toPascalCase(string $word): string
@@ -218,6 +273,7 @@ final class Str
 	 * Convert a word to title case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in title case e.g. "Hello World".
 	 */
 	public static function toTitleCase(string $word): string
@@ -233,6 +289,7 @@ final class Str
 	 * Convert a word to lower case.
 	 *
 	 * @param string $word The word to convert e.g. "Hello World".
+	 *
 	 * @return string The word in lower case e.g. "hello world".
 	 */
 	public static function toLowerCase(string $word): string
@@ -248,6 +305,7 @@ final class Str
 	 * Convert a word to upper case.
 	 *
 	 * @param string $word The word to convert e.g. "Hello World".
+	 *
 	 * @return string The word in upper case e.g. "HELLO WORLD".
 	 */
 	public static function toUpperCase(string $word): string
@@ -263,6 +321,7 @@ final class Str
 	 * Convert a word to macro case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in macro case e.g. "HELLO_WORLD".
 	 */
 	public static function toMacroCase(string $word): string
@@ -278,6 +337,7 @@ final class Str
 	 * Convert a word to Cobol case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in Cobol case e.g. "HELLO-WORLD".
 	 */
 	public static function toCobolCase(string $word): string
@@ -293,6 +353,7 @@ final class Str
 	 * Convert a word to sentence case.
 	 *
 	 * @param string $word The word to convert e.g. "hello_world".
+	 *
 	 * @return string The word in sentence case e.g. "Hello world".
 	 */
 	public static function toSentenceCase(string $word): string
