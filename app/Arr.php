@@ -67,6 +67,7 @@ final class Arr
 	/**
 	 * @param array<mixed>         $fields
 	 * @param array<string, mixed> $element
+	 *
 	 * @return array<string, mixed>
 	 */
 	private static function reduceElementKeys(array $fields, array $element): array
