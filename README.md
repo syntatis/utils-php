@@ -43,9 +43,9 @@ Val::isEmail('example@example.com'); // true
 Val::isEmail('invalid-email'); // false
 ```
 
-### Case Converter
+### Strings
 
-The case converter functions allow you to convert strings to various cases, such as camel case, snake case, or kebab case.
+This package includes several functions to handle strings, such as converting a string to camel case, makes a word plural, or checking if a string starts with a specific substring.
 
 | Function      | Description                                                            |
 |---------------|------------------------------------------------------------------------|
@@ -59,6 +59,11 @@ The case converter functions allow you to convert strings to various cases, such
 | `Str::toUpperCase`    | Converts a string to upper case e.g. `fooBar` to `FOOBAR`.     |
 | `Str::toMacroCase`    | Converts a string to macro case e.g. `fooBar` to `FOO_BAR`.    |
 | `Str::toCobolCase`    | Converts a string to Cobol case e.g. `fooBar` to `FOO-BAR`.    |
+| `Str::toPlural`       | Pluralizes a word e.g. `apple` to `apples`.                    |
+| `Str::toSingular`     | Singularizes a word e.g. `apples` to `apple`.                  |
+| `Str::toSlug`         | Slugifies a string e.g. `Hello, World!` to `hello-world`.      |
+| `Str::startsWith`     | Check if a string starts with a specific substring.            |
+| `Str::endsWith`       | Check if a string ends with a specific substring.              |
 
 #### Examples
 
@@ -67,23 +72,10 @@ use function Syntatis\Utils\Str;
 
 // Convert a string to camel case
 Str::toCamelCase('foo_bar'); // fooBar
-```
-
-### Inflector
-
-The inflector functions perform common inflection tasks, such as pluralizing or singularizing words.
-
-| Function         | Description                                              |
-|------------------|----------------------------------------------------------|
-| `Str::toPlural`  | Pluralizes a word e.g. `apple` to `apples`.              |
-| `Str::toSingular`| Singularizes a word e.g. `apples` to `apple`.            |
-| `Str::toSlug`    | Slugifies a string e.g. `Hello, World!` to `hello-world`.|
-
-#### Examples
-
-```php
-use function Syntatis\Utils\Str;
 
 // Pluralize a word
 Str::toPlural('apple'); // apples
+
+// Check if a string starts with a specific substring
+Str::startsWith('Hello, World!', 'Hello'); // true
 ```
