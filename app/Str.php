@@ -7,6 +7,14 @@ namespace Syntatis\Utils;
 use Syntatis\Utils\Support\Str\CaseConverter;
 use Syntatis\Utils\Support\Str\Inflector;
 
+use function str_ends_with;
+use function str_starts_with;
+use function strlen;
+use function strncmp;
+use function substr_compare;
+
+use const PHP_VERSION_ID;
+
 final class Str
 {
 	/**
@@ -107,6 +115,46 @@ final class Str
 	 */
 	final private function __construct()
 	{
+	}
+
+	/**
+	 * Check if a string starts with a specific substring.
+	 *
+	 * @param string $haystack The string to search in e.g. HelloWorld.
+	 * @param string $needle   The substring to search for e.g. Hello.
+	 */
+	public static function startsWith(string $haystack, string $needle): bool
+	{
+		if (PHP_VERSION_ID >= 80000) {
+			return str_starts_with($haystack, $needle);
+		}
+
+		return strncmp($haystack, $needle, strlen($needle)) === 0;
+	}
+
+	/**
+	 * Check if a string ends with a specific substring.
+	 *
+	 * @param string $haystack The string to search in e.g. HelloWorld.
+	 * @param string $needle   The substring to search for e.g. World.
+	 */
+	public static function endsWith(string $haystack, string $needle): bool
+	{
+		if (PHP_VERSION_ID >= 80000) {
+			return str_ends_with($haystack, $needle);
+		}
+
+		if ($needle === '' || $needle === $haystack) {
+			return true;
+		}
+
+		if ($haystack === '') {
+			return false;
+		}
+
+		$needleLength = strlen($needle);
+
+		return $needleLength <= strlen($haystack) && substr_compare($haystack, $needle, -$needleLength) === 0;
 	}
 
 	/**
