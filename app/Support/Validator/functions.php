@@ -11,6 +11,8 @@ use function trigger_deprecation;
  *
  * @param mixed $value
  *
+ * @deprecated 1.4, use `Val::isEmail` instead.
+ *
  * @phpstan-assert-if-true non-empty-string $value
  * @psalm-assert-if-true non-empty-string $value
  */
@@ -33,6 +35,8 @@ function is_email($value): bool
  *
  * @param mixed           $value
  * @param array<int>|null $versions
+ *
+ * @deprecated 1.4, use `Val::isEmail` instead.
  */
 function is_uuid($value, ?array $versions = null): bool
 {
@@ -50,6 +54,7 @@ function is_uuid($value, ?array $versions = null): bool
 /**
  * @param  mixed ...$value
  *
+ * @deprecated 1.4, use `Val::isBlank` instead.
  * @phpstan-assert-if-true ''|array{}|false|null $value
  */
 function is_blank(...$value): bool
@@ -77,6 +82,8 @@ function is_blank(...$value): bool
  * @param mixed                                               $value
  * @param array<array-key, "http"|"https"|"ftp"|"file"|"git"> $protocols
  *
+ * @deprecated 1.4, use `Val::isURL` instead.
+ *
  * @phpstan-assert-if-true non-empty-string $value
  * @psalm-assert-if-true non-empty-string $value
  */
@@ -95,6 +102,8 @@ function is_url($value, array $protocols = ['http', 'https']): bool
 
 /**
  * @param mixed $value
+ *
+ * @deprecated 1.4, use `Val::isSemVer` instead.
  *
  * @phpstan-assert-if-true non-empty-string $value
  * @psalm-assert-if-true non-empty-string $value
@@ -116,6 +125,8 @@ function is_semver($value): bool
  * Validate if the value is a valid IPv4 or IPv6 address.
  *
  * @param mixed $value
+ *
+ * @deprecated 1.4, use `Val::isIPAddress` instead.
  *
  * @phpstan-assert-if-true non-empty-string $value
  * @psalm-assert-if-true non-empty-string $value
@@ -141,6 +152,8 @@ function is_ip_address($value): bool
  * @param string|array<string> $fields Specifies the key or keys in a collection
  *                                     to be examined for uniqueness.
  *                                     Required PHP 8.1 or higher.
+ *
+ * @deprecated 1.4, use `Val::isUnique` instead.
  *
  * @phpstan-assert-if-true non-empty-array $value
  * @psalm-assert-if-true non-empty-array $value

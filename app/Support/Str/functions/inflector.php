@@ -8,6 +8,8 @@ use function trigger_deprecation;
 
 /**
  * Convert a string (word) to its singular form.
+ *
+ * @deprecated 1.3, use `Str::toSingular` instead.
  */
 function singularize(string $value): string
 {
@@ -24,6 +26,8 @@ function singularize(string $value): string
 
 /**
  * Convert a string (word) to its plural form.
+ *
+ * @deprecated 1.3, use `Str::toPlural` instead.
  */
 function pluralize(string $value): string
 {
@@ -40,6 +44,8 @@ function pluralize(string $value): string
 
 /**
  * Convert a string to a URL friendly format.
+ *
+ * @deprecated 1.3, use `Str::toSlug` instead.
  */
 function slugify(string $value): string
 {

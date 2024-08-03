@@ -8,6 +8,8 @@ use function trigger_deprecation;
 
 /**
  * Convert a string to "camelCase" format.
+ *
+ * @deprecated 1.3, use `Str::toCamelCase` instead.
  */
 function camelcased(string $value): string
 {
@@ -24,6 +26,8 @@ function camelcased(string $value): string
 
 /**
  * Convert a string to "kebab-case" format.
+ *
+ * @deprecated 1.3, use `Str::toKebabCase` instead.
  */
 function kebabcased(string $value): string
 {
@@ -40,6 +44,8 @@ function kebabcased(string $value): string
 
 /**
  * Convert a string to "snake_case" format.
+ *
+ * @deprecated 1.3, use `Str::toSnakeCase` instead.
  */
 function snakecased(string $value): string
 {
@@ -56,6 +62,8 @@ function snakecased(string $value): string
 
 /**
  * Convert a string to "PascalCase" format.
+ *
+ * @deprecated 1.3, use `Str::toPascalCase` instead.
  */
 function pascalcased(string $value): string
 {
@@ -72,6 +80,8 @@ function pascalcased(string $value): string
 
 /**
  * Convert a string to "Title case" format.
+ *
+ * @deprecated 1.3, use `Str::toTitleCase` instead.
  */
 function titlecased(string $value): string
 {
@@ -88,6 +98,8 @@ function titlecased(string $value): string
 
 /**
  * Convert a string to "lowercased" format.
+ *
+ * @deprecated 1.3, use `Str::toLowercase` instead.
  */
 function lowercased(string $value): string
 {
@@ -104,6 +116,8 @@ function lowercased(string $value): string
 
 /**
  * Convert a string to "UPPERCASE" format.
+ *
+ * @deprecated 1.3, use `Str::toUpperCase` instead.
  */
 function uppercased(string $value): string
 {
@@ -120,6 +134,8 @@ function uppercased(string $value): string
 
 /**
  * Convert a string to "MACRO_CASED" format.
+ *
+ * @deprecated 1.3, use `Str::toMacroCase` instead.
  */
 function macrocased(string $value): string
 {
@@ -136,6 +152,8 @@ function macrocased(string $value): string
 
 /**
  * Convert a string to "COBOL-CASED" format.
+ *
+ * @deprecated 1.3, use `Str::toCobolCase` instead.
  */
 function cobolcased(string $value): string
 {
@@ -152,6 +170,8 @@ function cobolcased(string $value): string
 
 /**
  * Convert a string to "Sentence case" format.
+ *
+ * @deprecated 1.3, use `Str::toSentenceCase` instead.
  */
 function sentencecased(string $value): string
 {
