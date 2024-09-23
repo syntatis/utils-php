@@ -13,8 +13,10 @@ updates:
       interval: "weekly"
       day: "sunday"
     ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: "symfony/*"
+        versions: [">5.0"]
+      - dependency-name: "phpunit/*"
+        versions: [">9.0"]
     groups:
       composer-require:
         dependency-type: "production"
