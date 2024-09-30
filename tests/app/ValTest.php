@@ -15,13 +15,6 @@ use Syntatis\Utils\Val;
 use function chr;
 use function sprintf;
 use function str_repeat;
-use function Syntatis\Utils\is_blank;
-use function Syntatis\Utils\is_email;
-use function Syntatis\Utils\is_ip_address;
-use function Syntatis\Utils\is_semver;
-use function Syntatis\Utils\is_unique;
-use function Syntatis\Utils\is_url;
-use function Syntatis\Utils\is_uuid;
 
 class ValTest extends TestCase
 {
@@ -40,7 +33,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsEmailValid($value): void
 	{
-		$this->assertTrue(is_email($value));
 		$this->assertTrue(Val::isEmail($value));
 	}
 
@@ -52,7 +44,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsEmailInvalid($value): void
 	{
-		$this->assertFalse(is_email($value));
 		$this->assertFalse(Val::isEmail($value));
 	}
 
@@ -64,7 +55,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsURLValid($value): void
 	{
-		$this->assertTrue(is_url($value));
 		$this->assertTrue(Val::isURL($value));
 	}
 
@@ -76,7 +66,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsURLInvalid($value): void
 	{
-		$this->assertFalse(is_url($value));
 		$this->assertFalse(Val::isURL($value));
 	}
 
@@ -88,7 +77,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsBlank($value): void
 	{
-		$this->assertTrue(is_blank($value));
 		$this->assertTrue(Val::isBlank($value));
 	}
 
@@ -103,13 +91,6 @@ class ValTest extends TestCase
 		$this->assertFalse(Val::isBlank($value));
 	}
 
-	/** @testdox it can validate a multiple blank value */
-	public function testIsBlankMultiple(): void
-	{
-		$this->assertTrue(is_blank([], '', ' ', false, null));
-		$this->assertFalse(is_blank([], 'this is not blank', ' ', false, null));
-	}
-
 	/**
 	 * @dataProvider dataIsUUID
 	 * @testdox it can validate a uuid value
@@ -119,7 +100,6 @@ class ValTest extends TestCase
 	public function testIsUUID($value): void
 	{
 		$this->assertTrue(Val::isUUID($value));
-		$this->assertTrue(is_uuid($value));
 	}
 
 	/**
@@ -131,7 +111,6 @@ class ValTest extends TestCase
 	public function testIsNotUUID($value): void
 	{
 		$this->assertFalse(Val::isUUID($value));
-		$this->assertFalse(is_uuid($value));
 	}
 
 	/**
@@ -142,7 +121,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsSemver($value): void
 	{
-		$this->assertTrue(is_semver($value));
 		$this->assertTrue(Val::isSemVer($value));
 	}
 
@@ -154,7 +132,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsNotSemver($value): void
 	{
-		$this->assertFalse(is_semver($value));
 		$this->assertFalse(Val::isSemVer($value));
 	}
 
@@ -166,7 +143,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsIpAddress($value): void
 	{
-		$this->assertTrue(is_ip_address($value));
 		$this->assertTrue(Val::isIPAddress($value));
 	}
 
@@ -178,7 +154,6 @@ class ValTest extends TestCase
 	 */
 	public function testIsNotIpAddress($value): void
 	{
-		$this->assertFalse(is_ip_address($value));
 		$this->assertFalse(Val::isIPAddress($value));
 	}
 
@@ -191,7 +166,6 @@ class ValTest extends TestCase
 	public function testIsUnique($value): void
 	{
 		$this->assertTrue(Val::isUnique($value));
-		$this->assertTrue(is_unique($value));
 	}
 
 	/**
@@ -203,7 +177,6 @@ class ValTest extends TestCase
 	public function testIsNotUnique($value): void
 	{
 		$this->assertFalse(Val::isUnique($value));
-		$this->assertFalse(is_unique($value));
 	}
 
 	/**
@@ -216,7 +189,6 @@ class ValTest extends TestCase
 	public function testIsUniqueOptionFields($value, $fields = []): void
 	{
 		$this->assertTrue(Val::isUnique($value, $fields));
-		$this->assertTrue(is_unique($value, $fields));
 	}
 
 	/**
@@ -229,7 +201,6 @@ class ValTest extends TestCase
 	public function testIsNotUniqueOptionFields($value, $fields = []): void
 	{
 		$this->assertFalse(Val::isUnique($value, $fields));
-		$this->assertFalse(is_unique($value, $fields));
 	}
 
 	public static function dataIsEmailValid(): array

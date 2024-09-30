@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Syntatis\Utils;
 
 use Syntatis\Utils\Support\Str\CaseConverter;
-use Syntatis\Utils\Support\Str\Inflector;
 
 use function str_ends_with;
 use function str_starts_with;
@@ -17,27 +16,6 @@ use const PHP_VERSION_ID;
 
 final class Str
 {
-	/**
-	 * Cache for singularized words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $singularized = [];
-
-	/**
-	 * Cache for pluralized words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $pluralized = [];
-
-	/**
-	 * Cache for slugified words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $slugified = [];
-
 	/**
 	 * Cache for camel-cased words.
 	 *
@@ -155,54 +133,6 @@ final class Str
 		$needleLength = strlen($needle);
 
 		return $needleLength <= strlen($haystack) && substr_compare($haystack, $needle, -$needleLength) === 0;
-	}
-
-	/**
-	 * Convert a word to its singular form.
-	 *
-	 * @param string $word The word to convert e.g. "dogs".
-	 *
-	 * @return string The singular form of the word e.g. "dog".
-	 */
-	public static function toSingular(string $word): string
-	{
-		if (isset(self::$singularized[$word])) {
-			return self::$singularized[$word];
-		}
-
-		return self::$singularized[$word] = Inflector::instance()->singularize($word);
-	}
-
-	/**
-	 * Convert a word to its plural form.
-	 *
-	 * @param string $word The word to convert e.g. "dog".
-	 *
-	 * @return string The plural form of the word e.g. "dogs".
-	 */
-	public static function toPlural(string $word): string
-	{
-		if (isset(self::$pluralized[$word])) {
-			return self::$pluralized[$word];
-		}
-
-		return self::$pluralized[$word] = Inflector::instance()->pluralize($word);
-	}
-
-	/**
-	 * Convert a word to a URL friendly format.
-	 *
-	 * @param string $word The word to convert e.g. "Hello World".
-	 *
-	 * @return string The URL friendly format of the word e.g. "hello-world".
-	 */
-	public static function toSlug(string $word): string
-	{
-		if (isset(self::$slugified[$word])) {
-			return self::$slugified[$word];
-		}
-
-		return self::$slugified[$word] = Inflector::instance()->urlize($word);
 	}
 
 	/**
