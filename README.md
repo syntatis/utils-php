@@ -59,9 +59,6 @@ This package includes several functions to handle strings, such as converting a 
 | `Str::toUpperCase`    | Converts a string to upper case e.g. `fooBar` to `FOOBAR`.     |
 | `Str::toMacroCase`    | Converts a string to macro case e.g. `fooBar` to `FOO_BAR`.    |
 | `Str::toCobolCase`    | Converts a string to Cobol case e.g. `fooBar` to `FOO-BAR`.    |
-| `Str::toPlural`       | Pluralizes a word e.g. `apple` to `apples`.                    |
-| `Str::toSingular`     | Singularizes a word e.g. `apples` to `apple`.                  |
-| `Str::toSlug`         | Slugifies a string e.g. `Hello, World!` to `hello-world`.      |
 | `Str::startsWith`     | Check if a string starts with a specific substring.            |
 | `Str::endsWith`       | Check if a string ends with a specific substring.              |
 
@@ -72,9 +69,6 @@ use function Syntatis\Utils\Str;
 
 // Convert a string to camel case
 Str::toCamelCase('foo_bar'); // fooBar
-
-// Pluralize a word
-Str::toPlural('apple'); // apples
 
 // Check if a string starts with a specific substring
 Str::startsWith('Hello, World!', 'Hello'); // true
