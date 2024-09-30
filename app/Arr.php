@@ -31,7 +31,7 @@ final class Arr
 	 */
 	public static function isList(array $array): bool
 	{
-		if ($array === array_values($array)) {
+		if ($array === [] || $array === array_values($array)) {
 			return true;
 		}
 
