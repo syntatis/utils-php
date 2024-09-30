@@ -73,3 +73,12 @@ Str::toCamelCase('foo_bar'); // fooBar
 // Check if a string starts with a specific substring
 Str::startsWith('Hello, World!', 'Hello'); // true
 ```
+
+### Arrays
+
+This package includes several functions to handle arrays. For example, checking if an array is a list or associative array, or checking if all elements in an array are unique.
+
+| Function       | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| `Arr::isList`  | Checks if an array is a list. If not then it is an associative array.  |
+| `Arr::isUnique`| Checks if all elements in an array are unique.                         |
