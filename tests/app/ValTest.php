@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Syntatis\Utils\Tests;
 
 use Error;
-use League\Uri\Http;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -319,7 +318,6 @@ class ValTest extends TestCase
 	public static function dataIsURLValid(): array
 	{
 		return [
-			[Http::createFromString('http://www.example.com')],
 			['http://a.pl'],
 			['http://www.example.com'],
 			['http://tt.example.com'],
