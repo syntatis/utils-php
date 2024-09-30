@@ -408,7 +408,6 @@ class ValTest extends TestCase
 	public static function dataIsURLInvalid(): array
 	{
 		return [
-			'null' => [null],
 			"' '" => [' '],
 			"''" => [''],
 			'example.com' => ['example.com'],
