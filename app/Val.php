@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Syntatis\Utils;
 
-use Psr\Http\Message\UriInterface;
-
 use function count;
 use function filter_var;
 use function implode;
@@ -98,19 +96,14 @@ final class Val
 	/**
 	 * Validates if the gvien value is a valid URL.
 	 *
-	 * @param mixed                                              $value
 	 * @param array<array-key,"http"|"https"|"ftp"|"file"|"git"> $protocols
 	 *
 	 * @phpstan-assert-if-true non-empty-string $value
 	 * @psalm-assert-if-true non-empty-string $value
 	 */
-	public static function isURL($value, array $protocols = ['http', 'https']): bool
+	public static function isURL(string $value, array $protocols = ['http', 'https']): bool
 	{
-		if ($value instanceof UriInterface) {
-			$value = (string) $value;
-		}
-
-		if (! is_string($value) || self::isBlank($value)) {
+		if (self::isBlank($value)) {
 			return false;
 		}
 
