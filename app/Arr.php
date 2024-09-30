@@ -7,6 +7,7 @@ namespace Syntatis\Utils;
 use InvalidArgumentException;
 
 use function array_key_exists;
+use function array_values;
 use function in_array;
 use function is_array;
 use function is_string;
@@ -20,6 +21,29 @@ final class Arr
 	 */
 	final private function __construct()
 	{
+	}
+
+	/**
+	 * Validates that the provided array is a list (i.e. it has only numeric keys
+	 * starting from 0 and increasing by 1 for each element).
+	 *
+	 * @param array<mixed> $array
+	 */
+	public static function isList(array $array): bool
+	{
+		if ($array === [] || $array === array_values($array)) {
+			return true;
+		}
+
+		$nextKey = -1;
+
+		foreach ($array as $k => $v) {
+			if ($k !== ++$nextKey) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**

@@ -71,6 +71,28 @@ class ArrTest extends TestCase
 		Arr::isUnique(['a' => [1], 'b' => [2], 'c' => [3]], [2]);
 	}
 
+	/**
+	 * @dataProvider dataIsList
+	 * @testdox it can validate list
+	 *
+	 * @param mixed $value
+	 */
+	public function testIsList($value): void
+	{
+		$this->assertTrue(Arr::isList($value));
+	}
+
+	/**
+	 * @dataProvider dataIsNotList
+	 * @testdox it can validate non-list
+	 *
+	 * @param mixed $value
+	 */
+	public function testIsNotList($value): void
+	{
+		$this->assertFalse(Arr::isList($value));
+	}
+
 	public static function dataIsUnique(): array
 	{
 		return [
@@ -129,6 +151,23 @@ class ArrTest extends TestCase
 				],
 				'latitude',
 			],
+		];
+	}
+
+	public static function dataIsList(): array
+	{
+		return [
+			'empty' => [[]],
+			'sequential' => [[1, 2, 3]],
+			'nested' => [[1, [2, 3], 4]],
+		];
+	}
+
+	public static function dataIsNotList(): array
+	{
+		return [
+			'associative' => [['a' => 1, 'b' => 2, 'c' => 3]],
+			'mixed' => [[1, 'a' => 2, 3]],
 		];
 	}
 }
