@@ -29,17 +29,11 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"autoload": {
-		"files": [
-			"inc/functions.php"
-		],
 		"psr-4": {
 			"Syntatis\\Utils\\": "app"
 		}
 	},
 	"autoload-dev": {
-		"files": [
-			"inc/functions.php"
-		],
 		"psr-4": {
 			"Syntatis\\Utils\\Tests\\": "tests"
 		}
@@ -63,8 +57,7 @@
 		"php": ">=7.4",
 		"doctrine/inflector": "^2.0",
 		"jawira/case-converter": "^3.5",
-		"psr/http-message": "^1.0",
-		"symfony/deprecation-contracts": "^2.5"
+		"psr/http-message": "^1.0"
 	},
 	"require-dev": {
 		"composer/installers": "^2.3",
