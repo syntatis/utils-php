@@ -30,8 +30,8 @@ final class Arr
 	 * @param array<mixed> $array
 	 *
 	 * @phpstan-assert-if-true list<mixed> $array
-	 * @phpstan-assert-if-false list<mixed> $array
-	 * @psalm-assert-if-true array<string,mixed> $array
+	 * @phpstan-assert-if-false array<string,mixed> $array
+	 * @psalm-assert-if-true list<mixed> $array
 	 * @psalm-assert-if-false array<string,mixed> $array
 	 */
 	public static function isList(array $array): bool
