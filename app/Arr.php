@@ -28,6 +28,11 @@ final class Arr
 	 * starting from 0 and increasing by 1 for each element).
 	 *
 	 * @param array<mixed> $array
+	 *
+	 * @phpstan-assert-if-true list<mixed> $array
+	 * @phpstan-assert-if-false list<mixed> $array
+	 * @psalm-assert-if-true array<string,mixed> $array
+	 * @psalm-assert-if-false array<string,mixed> $array
 	 */
 	public static function isList(array $array): bool
 	{
