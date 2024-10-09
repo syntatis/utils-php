@@ -165,15 +165,15 @@ final class Str
 	 *
 	 * @template T of string
 	 *
-	 * @param string $word The word to convert e.g. "helloWorld".
-	 * @phpstan-param T $word
-	 * @psalm-param T $word
+	 * @param string $value The word to convert e.g. "helloWorld".
+	 * @phpstan-param T $value
+	 * @psalm-param T $value
 	 *
 	 * @return string The word in snake case e.g. "hello_world".
 	 * @phpstan-return T
 	 * @psalm-return T
 	 */
-	public static function toSnakeCase(string $word): string
+	public static function toSnakeCase(string $value): string
 	{
 		/**
 		 * Cache for snake-cased words.
@@ -182,16 +182,16 @@ final class Str
 		 */
 		static $snakeCased = [];
 
-		if (isset($snakeCased[$word])) {
-			return $snakeCased[$word];
+		if (isset($snakeCased[$value])) {
+			return $snakeCased[$value];
 		}
 
 		/** @phpstan-var T $converted */
 		$converted = CaseConverter::instance()
-			->convert($word)
+			->convert($value)
 			->toSnake();
 
-		return $snakeCased[$word] = $converted;
+		return $snakeCased[$value] = $converted;
 	}
 
 	/**
