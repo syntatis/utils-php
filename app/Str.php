@@ -31,13 +31,6 @@ final class Str
 	private static array $kebabCased = [];
 
 	/**
-	 * Cache for snake-cased words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $snakeCased = [];
-
-	/**
 	 * Cache for pascal-cased words.
 	 *
 	 * @var array<string,string>
@@ -170,17 +163,35 @@ final class Str
 	/**
 	 * Convert a word to snake case.
 	 *
+	 * @template T of string
+	 *
 	 * @param string $word The word to convert e.g. "helloWorld".
+	 * @phpstan-param T $word
+	 * @psalm-param T $word
 	 *
 	 * @return string The word in snake case e.g. "hello_world".
+	 * @phpstan-return T
+	 * @psalm-return T
 	 */
 	public static function toSnakeCase(string $word): string
 	{
-		if (isset(self::$snakeCased[$word])) {
-			return self::$snakeCased[$word];
+		/**
+		 * Cache for snake-cased words.
+		 *
+		 * @phpstan-var array<T,T> $snakeCased
+		 */
+		static $snakeCased = [];
+
+		if (isset($snakeCased[$word])) {
+			return $snakeCased[$word];
 		}
 
-		return self::$snakeCased[$word] = CaseConverter::instance()->convert($word)->toSnake();
+		/** @phpstan-var T $converted */
+		$converted = CaseConverter::instance()
+			->convert($word)
+			->toSnake();
+
+		return $snakeCased[$word] = $converted;
 	}
 
 	/**
