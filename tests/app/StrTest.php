@@ -25,6 +25,7 @@ class StrTest extends TestCase
 	 */
 	public function testCamelCased(string $value, string $expect): void
 	{
+		Str::toCamelCase($value);
 		$this->assertEquals($expect, Str::toCamelCase($value));
 	}
 
@@ -34,6 +35,7 @@ class StrTest extends TestCase
 	 */
 	public function testKebabCased(string $value, string $expect): void
 	{
+		Str::toKebabCase($value);
 		$this->assertEquals($expect, Str::toKebabCase($value));
 	}
 
@@ -43,6 +45,7 @@ class StrTest extends TestCase
 	 */
 	public function testSnakeCased(string $value, string $expect): void
 	{
+		Str::toSnakeCase($value);
 		$this->assertEquals($expect, Str::toSnakeCase($value));
 	}
 
@@ -52,6 +55,7 @@ class StrTest extends TestCase
 	 */
 	public function testPascalCased(string $value, string $expect): void
 	{
+		Str::toPascalCase($value);
 		$this->assertEquals($expect, Str::toPascalCase($value));
 	}
 
@@ -61,6 +65,7 @@ class StrTest extends TestCase
 	 */
 	public function testTitleCased(string $value, string $expect): void
 	{
+		Str::toTitleCase($value);
 		$this->assertEquals($expect, Str::toTitleCase($value));
 	}
 
@@ -70,6 +75,7 @@ class StrTest extends TestCase
 	 */
 	public function testLowerCased(string $value, string $expect): void
 	{
+		Str::toLowerCase($value);
 		$this->assertEquals($expect, Str::toLowerCase($value));
 	}
 
@@ -79,6 +85,7 @@ class StrTest extends TestCase
 	 */
 	public function testUpperCased(string $value, string $expect): void
 	{
+		Str::toUpperCase($value);
 		$this->assertEquals($expect, Str::toUpperCase($value));
 	}
 
@@ -88,6 +95,7 @@ class StrTest extends TestCase
 	 */
 	public function testMacroCased(string $value, string $expect): void
 	{
+		Str::toMacroCase($value);
 		$this->assertEquals($expect, Str::toMacroCase($value));
 	}
 
@@ -97,6 +105,7 @@ class StrTest extends TestCase
 	 */
 	public function testCobolCased(string $value, string $expect): void
 	{
+		Str::toCobolCase($value);
 		$this->assertEquals($expect, Str::toCobolCase($value));
 	}
 
@@ -106,6 +115,7 @@ class StrTest extends TestCase
 	 */
 	public function testSentenceCased(string $value, string $expect): void
 	{
+		Str::toSentenceCase($value);
 		$this->assertEquals($expect, Str::toSentenceCase($value));
 	}
 

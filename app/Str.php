@@ -6,7 +6,6 @@ namespace Syntatis\Utils;
 
 use Syntatis\Utils\Support\Str\CaseConverter;
 
-use function PHPStan\dumpType;
 use function str_ends_with;
 use function str_starts_with;
 use function strlen;
@@ -17,34 +16,6 @@ use const PHP_VERSION_ID;
 
 final class Str
 {
-	/**
-	 * Cache for upper-cased words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $upperCased = [];
-
-	/**
-	 * Cache for macro-cased words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $macroCased = [];
-
-	/**
-	 * Cache for Cobol-cased words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $cobolCased = [];
-
-	/**
-	 * Cache for sentence-cased words.
-	 *
-	 * @var array<string,string>
-	 */
-	private static array $sentenceCased = [];
-
 	/**
 	 * Prevent instantiation.
 	 *
@@ -95,7 +66,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to camelCase.
+	 * Convert a value to "camelCase".
 	 *
 	 * @template T of string
 	 *
@@ -106,7 +77,7 @@ final class Str
 	public static function toCamelCase(string $value): string
 	{
 		/**
-		 * Cache for camelCased values.
+		 * Cache for "camelCased" values.
 		 *
 		 * @var array<T,T> $camelCased
 		 */
@@ -125,7 +96,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to kebab-case.
+	 * Convert a value to "kebab-case".
 	 *
 	 * @template T of string
 	 *
@@ -136,7 +107,7 @@ final class Str
 	public static function toKebabCase(string $value): string
 	{
 		/**
-		 * Cache for kebab-cased words.
+		 * Cache for "kebab-cased" value.
 		 *
 		 * @var array<T,T> $kebabCased
 		 */
@@ -155,7 +126,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to snake case.
+	 * Convert a value to "snake case".
 	 *
 	 * @template T of string
 	 *
@@ -166,7 +137,7 @@ final class Str
 	public static function toSnakeCase(string $value): string
 	{
 		/**
-		 * Cache for snake-cased words.
+		 * Cache for "snake-cased" value.
 		 *
 		 * @var array<T,T> $snakeCased
 		 */
@@ -185,7 +156,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to PascalCase.
+	 * Convert a value to "PascalCase".
 	 *
 	 * @template T of string
 	 *
@@ -196,7 +167,7 @@ final class Str
 	public static function toPascalCase(string $value): string
 	{
 		/**
-		 * Cache for PascalCased words.
+		 * Cache for "PascalCased" value.
 		 *
 		 * @var array<T,T> $pascalCased
 		 */
@@ -215,7 +186,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to Title Case.
+	 * Convert a value to "Title Case".
 	 *
 	 * @template T of string
 	 *
@@ -226,7 +197,7 @@ final class Str
 	public static function toTitleCase(string $value): string
 	{
 		/**
-		 * Cache for Title Cased words.
+		 * Cache for "Title Cased" values.
 		 *
 		 * @var array<T,T> $titleCased
 		 */
@@ -245,7 +216,7 @@ final class Str
 	}
 
 	/**
-	 * Convert a value to lowercase.
+	 * Convert a value to "lowercase".
 	 *
 	 * @template T of string
 	 *
@@ -256,7 +227,7 @@ final class Str
 	public static function toLowerCase(string $value): string
 	{
 		/**
-		 * Cache for lowercased words.
+		 * Cache for "lowercased" value.
 		 *
 		 * @var array<T,T> $lowerCased
 		 */
@@ -275,72 +246,122 @@ final class Str
 	}
 
 	/**
-	 * Convert a word to upper case.
+	 * Convert a value to "UPPER CASE".
 	 *
-	 * @param string $word The word to convert e.g. "Hello World".
+	 * @template T of string
 	 *
-	 * @return string The word in upper case e.g. "HELLO WORLD".
+	 * @param T $value The value to convert e.g. "Hello World".
+	 *
+	 * @return T The value in upper case e.g. "HELLO WORLD".
 	 */
-	public static function toUpperCase(string $word): string
+	public static function toUpperCase(string $value): string
 	{
-		if (isset(self::$upperCased[$word])) {
-			return self::$upperCased[$word];
+		/**
+		 * Cache for "UPPER CASED" value.
+		 *
+		 * @var array<T,T> $upperCased
+		 */
+		static $upperCased = [];
+
+		if (isset($upperCased[$value])) {
+			return $upperCased[$value];
 		}
 
-		return self::$upperCased[$word] = CaseConverter::instance()->convert($word)->toUpper();
+		/** @var T $converted */
+		$converted = CaseConverter::instance()
+			->convert($value)
+			->toUpper();
+
+		return $upperCased[$value] = $converted;
 	}
 
 	/**
-	 * Convert a word to macro case.
+	 * Convert a value to "MACRO_CASE".
 	 *
-	 * @param string $word The word to convert e.g. "hello_world".
+	 * @template T of string
 	 *
-	 * @return string The word in macro case e.g. "HELLO_WORLD".
+	 * @param T $value The value to convert e.g. "hello_world".
+	 *
+	 * @return T The value in macro case e.g. "HELLO_WORLD".
 	 */
-	public static function toMacroCase(string $word): string
+	public static function toMacroCase(string $value): string
 	{
-		if (isset(self::$macroCased[$word])) {
-			return self::$macroCased[$word];
+		/**
+		 * Cache for "MACRO_CASED" value.
+		 *
+		 * @var array<T,T> $macroCased
+		 */
+		static $macroCased = [];
+
+		if (isset($macroCased[$value])) {
+			return $macroCased[$value];
 		}
 
-		return self::$macroCased[$word] = CaseConverter::instance()->convert($word)->toMacro();
+		/** @var T $converted */
+		$converted = CaseConverter::instance()
+			->convert($value)
+			->toMacro();
+
+		return $macroCased[$value] = $converted;
 	}
 
 	/**
-	 * Convert a word to Cobol case.
+	 * Convert a value to "COBOL-CASE".
 	 *
-	 * @param string $word The word to convert e.g. "hello_world".
+	 * @template T of string
 	 *
-	 * @return string The word in Cobol case e.g. "HELLO-WORLD".
+	 * @param T $value The value to convert e.g. "hello_world".
+	 *
+	 * @return T The value in Cobol case e.g. "HELLO-WORLD".
 	 */
-	public static function toCobolCase(string $word): string
+	public static function toCobolCase(string $value): string
 	{
-		if (isset(self::$cobolCased[$word])) {
-			return self::$cobolCased[$word];
+		/**
+		 * Cache for "COBOL-CASED" value.
+		 *
+		 * @var array<T,T> $cobolCased
+		 */
+		static $cobolCased = [];
+
+		if (isset($cobolCased[$value])) {
+			return $cobolCased[$value];
 		}
 
-		return self::$cobolCased[$word] = CaseConverter::instance()->convert($word)->toCobol();
+		/** @var T $converted */
+		$converted = CaseConverter::instance()
+			->convert($value)
+			->toCobol();
+
+		return $cobolCased[$value] = $converted;
 	}
 
 	/**
-	 * Convert a word to sentence case.
+	 * Convert a value to "Sentence case".
 	 *
-	 * @param string $word The word to convert e.g. "hello_world".
+	 * @template T of string
 	 *
-	 * @return string The word in sentence case e.g. "Hello world".
+	 * @param T $value The value to convert e.g. "hello_world".
+	 *
+	 * @return T The value in sentence case e.g. "Hello world".
 	 */
-	public static function toSentenceCase(string $word): string
+	public static function toSentenceCase(string $value): string
 	{
-		if (isset(self::$sentenceCased[$word])) {
-			return self::$sentenceCased[$word];
+		/**
+		 * Cache for "Sentence cased" value.
+		 *
+		 * @var array<T,T> $sentenceCased
+		 */
+		static $sentenceCased = [];
+
+		if (isset($sentenceCased[$value])) {
+			return $sentenceCased[$value];
 		}
 
-		return self::$sentenceCased[$word] = CaseConverter::instance()->convert($word)->toSentence();
+		/** @var T $converted */
+		$converted = CaseConverter::instance()
+			->convert($value)
+			->toSentence();
+
+		return $sentenceCased[$value] = $converted;
 	}
 }
-
-/** @phpstan-var non-empty-string $v */
-$v = 'hello_world';
-$v = Str::toLowerCase($v);
-
-dumpType($v);
