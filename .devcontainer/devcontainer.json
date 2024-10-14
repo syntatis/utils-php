@@ -18,10 +18,13 @@
 			"extensions": [
 				"bmewburn.vscode-intelephense-client",
 				"christian-kohler.path-intellisense",
-				"editorConfig.editorConfig",
+				"editorconfig.editorconfig",
+				"kasik96.latte",
+				"mikestead.dotenv",
 				"neilbrayfield.php-docblocker",
-				"SanderRonde.phpstan-vscode",
-				"wongjn.php-sniffer"
+				"sanderronde.phpstan-vscode",
+				"wmaurer.change-case",
+				"dotjoshjohnson.xml"
 			]
 		}
 	}
