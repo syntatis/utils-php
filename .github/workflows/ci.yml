@@ -26,29 +26,12 @@ on:
       - "phpunit.xml.dist"
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
-
-      - name: Run linter
-        run: composer phpcs
-
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        version: [7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+        version: ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -73,10 +56,15 @@ jobs:
       - name: Install dependencies
         run: composer update --prefer-dist --no-ansi --no-interaction --no-progress
 
+      - name: Run linter
+        if: ${{ matrix.version == '7.4' }}
+        run: composer phpcs
+
+      - name: Run static analysis
+        run: composer phpstan
+
       - name: Run test
-        run: |
-          composer phpstan
-          vendor/bin/phpunit --testdox --coverage-clover coverage.xml
+        run: vendor/bin/phpunit --coverage-clover coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
