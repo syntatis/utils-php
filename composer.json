@@ -69,6 +69,6 @@
 		"phpunit/phpunit": "^9.6",
 		"squizlabs/php_codesniffer": "^3.10",
 		"symfony/var-dumper": ">=5.4.40",
-		"syntatis/coding-standard": "^1.4"
+		"syntatis/coding-standard": "^1.5"
 	}
 }
