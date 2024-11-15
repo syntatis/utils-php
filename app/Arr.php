@@ -59,8 +59,8 @@ final class Arr
 	 * @param string|array<string> $fields Specifies the key or keys in a collection
 	 *                                     to be examined for uniqueness.
 	 *
-	 * @phpstan-assert-if-true non-empty-array $value
-	 * @psalm-assert-if-true non-empty-array $value
+	 * @phpstan-assert-if-true non-empty-array<mixed> $value
+	 * @psalm-assert-if-true non-empty-array<mixed> $value
 	 */
 	public static function isUnique(array $value, $fields = []): bool
 	{
@@ -94,10 +94,10 @@ final class Arr
 	}
 
 	/**
-	 * @param array<mixed>         $fields
-	 * @param array<string, mixed> $element
+	 * @param array<mixed> $fields
+	 * @param array<mixed> $element
 	 *
-	 * @return array<string, mixed>
+	 * @return array<mixed>
 	 */
 	private static function reduceElementKeys(array $fields, array $element): array
 	{
