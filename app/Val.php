@@ -182,8 +182,8 @@ final class Val
 	 *                                     to be examined for uniqueness.
 	 *                                     Required PHP 8.1 or higher.
 	 *
-	 * @phpstan-assert-if-true non-empty-array $value
-	 * @psalm-assert-if-true non-empty-array $value
+	 * @phpstan-assert-if-true non-empty-array<mixed> $value
+	 * @psalm-assert-if-true non-empty-array<mixed> $value
 	 */
 	public static function isUnique($value, $fields = []): bool
 	{
