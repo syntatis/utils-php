@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/php.yml"
+      - ".github/workflows/ci.yml"
       - "**.php"
       - "composer.json"
       - "composer.lock"
@@ -17,7 +17,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/php.yml"
+      - ".github/workflows/ci.yml"
       - "**.php"
       - "composer.json"
       - "composer.lock"
