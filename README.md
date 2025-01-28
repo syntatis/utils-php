@@ -1,6 +1,9 @@
 # 🧰 utils-php
 
-![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/syntatis/utils/php?color=%237A86B8) [![ci](https://github.com/syntatis/utils-php/actions/workflows/ci.yml/badge.svg)](https://github.com/syntatis/utils-php/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/syntatis/utils-php/graph/badge.svg?token=QH387BY1PK)](https://codecov.io/gh/syntatis/utils-php) ![Packagist Downloads](https://img.shields.io/packagist/dt/syntatis/utils)
+[![ci](https://github.com/syntatis/utils-php/actions/workflows/ci.yml/badge.svg)](https://github.com/syntatis/utils-php/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/syntatis/utils-php/graph/badge.svg?token=QH387BY1PK)](https://codecov.io/gh/syntatis/utils-php)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/syntatis/utils)](https://packagist.org/packages/syntatis/utils)
+![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/syntatis/utils/php?color=%237A86B8)
 
 The `syntatis/utils` package provides a variety of utility functions to simplify common tasks in PHP, including validation, case conversion, and inflection.
 
