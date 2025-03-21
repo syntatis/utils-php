@@ -67,7 +67,7 @@
 		"phpstan/phpstan-phpunit": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0",
 		"phpunit/phpunit": "^9.6",
-		"squizlabs/php_codesniffer": "^3.11",
+		"squizlabs/php_codesniffer": "^3.12",
 		"symfony/var-dumper": ">=5.4.40",
 		"syntatis/coding-standard": "^1.5"
 	}
