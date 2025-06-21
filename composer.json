@@ -55,7 +55,7 @@
 	},
 	"require": {
 		"php": ">=7.4",
-		"jawira/case-converter": "^3.5"
+		"jawira/case-converter": "^3.6"
 	},
 	"require-dev": {
 		"composer/installers": "^2.3",
