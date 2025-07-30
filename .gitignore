@@ -1,27 +1,42 @@
-#OS
-.DS_*
+# OS generated files #
+######################
+.DS_Store
+Thumbs.db
 
-# Composer
-/vendor
-composer.lock
-auth.json
-
-# Log, cache, and tmp files
-*.cache
+# Logs and databases #
+######################
+*.sql
 *.log
-*.meta
-tmp/
 
-# Dotenv
-.env.*
-!.env
+# Caches #
+##########
+*.cache
 
-# Tests #
-#############
+# Compiled source #
+###################
+*.tar*
+*.zip
+dist*
+build*
+@*
+
+# Dependencies #
+################
+vendor*
+composer.lock
+
+# Temporary files #
+###################
+tmp
 artifacts/
-phpunit.xml
-phpstan.neon
-phpcs.xml
 
-# Docker
-docker-composer.override.yml
+# Environment files #
+######################
+.env
+
+# Private Configs #
+######################
+phpcs.xml
+phpstan.xml
+phpunit.xml
+*.override.xml
