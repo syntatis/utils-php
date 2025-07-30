@@ -1,6 +1,10 @@
 {
-	"name": "syntatis/php-utils",
-	"image": "ghcr.io/syntatis/php:7.4-fpm",
+	"name": "syntatis/utils-php",
+	"dockerComposeFile": [
+		"../compose.yml"
+	],
+	"service": "php",
+	"workspaceFolder": "/var/www/work",
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -18,13 +22,10 @@
 			"extensions": [
 				"bmewburn.vscode-intelephense-client",
 				"christian-kohler.path-intellisense",
-				"editorconfig.editorconfig",
-				"kasik96.latte",
-				"mikestead.dotenv",
+				"editorConfig.editorConfig",
 				"neilbrayfield.php-docblocker",
-				"sanderronde.phpstan-vscode",
-				"wmaurer.change-case",
-				"dotjoshjohnson.xml"
+				"SanderRonde.phpstan-vscode",
+				"valeryanm.vscode-phpsab"
 			]
 		}
 	}

@@ -39,18 +39,13 @@
 		}
 	},
 	"scripts": {
-		"phpcs:fix": "vendor/bin/phpcbf",
-		"phpcs": "vendor/bin/phpcs",
-		"phpstan": "vendor/bin/phpstan analyse --xdebug",
-		"phpunit:coverage": [
+		"format": "vendor/bin/phpcbf",
+		"lint": "vendor/bin/phpcs",
+		"analyze": "vendor/bin/phpstan analyse --xdebug",
+		"test": "vendor/bin/phpunit --no-coverage",
+		"test:coverage": [
 			"@putenv XDEBUG_MODE=coverage",
 			"vendor/bin/phpunit"
-		],
-		"phpunit": "vendor/bin/phpunit --no-coverage",
-		"test": [
-			"@phpcs",
-			"@phpstan",
-			"@phpunit"
 		]
 	},
 	"require": {
@@ -70,5 +65,6 @@
 		"squizlabs/php_codesniffer": "^3.13",
 		"symfony/var-dumper": ">=5.4.40",
 		"syntatis/coding-standard": "^2.0"
-	}
+	},
+	"non-feature-branches": ["dependabot/*"]
 }

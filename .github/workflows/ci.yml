@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   workflow_dispatch:
@@ -13,55 +13,86 @@ on:
       - "phpcs.xml.dist"
       - "phpstan.neon.dist"
       - "phpunit.xml.dist"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/ci.yml"
-      - "**.php"
-      - "composer.json"
-      - "composer.lock"
-      - "phpcs.xml.dist"
-      - "phpstan.neon.dist"
-      - "phpunit.xml.dist"
+    types: [ready_for_review, synchronize, opened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  typo:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        version: ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
+    name: Typo
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Check spelling
+        uses: crate-ci/typos@v1.34.0
 
-      - name: Setup Composer cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ matrix.version }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: php-${{ matrix.version }}-composer-
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.version }}
-          tools: composer:v2
+          php-version: 7.4
 
-      - name: Install dependencies
-        run: composer update --prefer-dist --no-ansi --no-interaction --no-progress
+      - name: Install PHP dependencies
+        uses: ramsey/composer-install@v3
 
-      - name: Run linter
-        if: ${{ matrix.version == '7.4' }}
-        run: composer phpcs
+      - name: Analyze source code
+        run: composer lint
 
-      - name: Run static analysis
-        run: composer phpstan
+  analyze:
+    runs-on: ubuntu-latest
+    name: Analyze
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+
+      - name: Install PHP dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Analyze source code
+        run: composer analyze
+
+  test:
+    needs: [typo, lint, analyze]
+    runs-on: ubuntu-latest
+    name: Test
+
+    strategy:
+      fail-fast: true
+      max-parallel: 3
+      matrix:
+        php-version: ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
+        stability: [prefer-lowest, prefer-stable]
+        machine: [windows-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP for test
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Install PHP dependencies
+        uses: ramsey/composer-install@v3
 
       - name: Run test
         run: vendor/bin/phpunit --coverage-clover coverage.xml
