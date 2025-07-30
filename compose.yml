@@ -1,0 +1,10 @@
+services:
+  php:
+    image: ghcr.io/syntatis/php:${PHP_VERSION:-7.4}-fpm
+    restart: on-failure
+    volumes:
+      - ./:/var/www/work
+      - vscode_server_volume:/root/.vscode-server
+
+volumes:
+  vscode_server_volume:
