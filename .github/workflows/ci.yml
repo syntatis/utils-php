@@ -92,6 +92,8 @@ jobs:
 
       - name: Install PHP dependencies
         uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
 
       - name: Run test
         run: vendor/bin/phpunit --coverage-clover coverage.xml
