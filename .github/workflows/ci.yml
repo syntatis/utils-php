@@ -98,6 +98,5 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
-        if: ${{ matrix.php-version == '8.4' && matrix.dependencies == 'highest' }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
