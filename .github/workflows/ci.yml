@@ -45,7 +45,7 @@ jobs:
           php-version: "7.4"
 
       - name: Install PHP dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: Analyze source code
         run: composer lint
@@ -64,7 +64,7 @@ jobs:
           php-version: "7.4"
 
       - name: Install PHP dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: Analyze source code
         run: composer analyze
@@ -91,7 +91,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
 
       - name: Install PHP dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: ${{ matrix.dependencies }}
 
